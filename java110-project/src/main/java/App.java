@@ -32,16 +32,69 @@ public class App {
         
     }
     
-    
+
     static Member[] members = new Member[100];
+
+    
     static int index = 0;          
     static Scanner keyIn = new Scanner(System.in);
     
     public static void main(String[] args) {
-         
-        inputMembers();
-        printMembers();
+        
+        while(true) {
+            String menu = promptMenu();
+
+            if ( menu.equals("1") ) {
+                serviceStudentMenu(); 
+            } else if(menu.equals("0")) {
+                System.out.println("안녕히 가세요!!!!");
+                break;
+            }
+        }
+        
         keyIn.close();
+        
+    }
+
+    private static void serviceStudentMenu() {
+        while(true) {     
+            System.out.print("학생관리 > ");
+            String command = keyIn.nextLine();
+            if(command.toLowerCase().equals("list")) {
+                printMembers();
+            }else if(command.toLowerCase().equals("add")){
+                inputMembers();
+            }else if(command.toLowerCase().equals("quit")) {
+                break;
+            }                    
+            else {
+                System.out.println("유호하지 않은 명령입니다.");
+            }
+        }
+    }
+
+    private static String promptMenu() {
+        // 사용자로부터 메뉴를 입력받기
+        System.out.println("[메뉴]");
+        System.out.println("1. 학생관리");
+        System.out.println("2. 강사관리");
+        System.out.println("3. 매니저 관리");
+        System.out.println("0. 종료");
+        
+        while(true) {
+            System.out.print("메뉴 번호 > ");
+            String menu = keyIn.nextLine();
+            
+            switch (menu){
+            case "0":
+            case "1":
+            case "2":
+            case "3":
+                return menu;
+            default:
+                System.out.println("메뉴 번호가 유호하지 않습니다.");
+            }
+        }
         
     }
     
