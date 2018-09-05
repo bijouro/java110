@@ -1,5 +1,6 @@
 package bitcamp.java110.cms.control;
 import java.util.Scanner;
+
 import bitcamp.java110.cms.domain.Member;
 
 
@@ -36,6 +37,10 @@ public class ManagerController {
                 printManagers();
             }else if(command.toLowerCase().equals("add")){
                 inputManagers();
+            }else if(command.toLowerCase().equals("delete")){
+                deleteManager();
+            }else if(command.toLowerCase().equals("detail")){
+                detailManager();
             }else if(command.toLowerCase().equals("quit")) {
                 break;
             }                    
@@ -82,6 +87,9 @@ public class ManagerController {
             System.out.print("직위 : ");
             m.setPosition(keyIn.nextLine());   
             
+            if(managerIndex == managers.length) {
+                increaseStorage();
+            }
             
             managers[managerIndex++] = m;
             
@@ -92,4 +100,49 @@ public class ManagerController {
                 break;
         }
     }
+    
+    private static void increaseStorage() {
+        Manager[] newList = new Manager[managers.length+3];
+        for(int i = 0 ; i < managers.length ; i++) {
+            newList[i] = managers[i];
+        }
+        
+        managers = newList;
+    }
+    
+    private static void deleteManager() {
+        System.out.print("삭제할 번호 : ");
+        int no = Integer.parseInt(keyIn.nextLine());
+        
+        if( no < 0 || no >= managerIndex) {
+            System.out.println("존재하지 않는 번호입니다.");
+            return;
+        }
+        
+        for(int i = no ; i <= managerIndex - 2 ; i++) {
+            managers[i] = managers[i+1];
+        }
+        managerIndex--;
+        
+        System.out.println("삭제 되었습니다.");
+    }
+    
+    private static void detailManager() {
+        System.out.print("조회할 번호 : ");
+        int no = Integer.parseInt(keyIn.nextLine());
+        
+        if( no < 0 || no >= managerIndex) {
+            System.out.println("존재하지 않는 번호입니다.");
+            return;
+        }
+        
+        System.out.printf("이름 : %s\n", managers[no].getName());
+        System.out.printf("이메일 : %s\n", managers[no].getEmail());
+        System.out.printf("패스워드 : %s\n", managers[no].getPassword());
+        System.out.printf("전화 : %s\n", managers[no].getTel());
+        System.out.printf("직위 : %s\n", managers[no].getPosition());
+        
+    }
+    
+    
 }

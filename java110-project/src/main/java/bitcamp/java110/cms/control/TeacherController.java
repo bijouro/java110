@@ -43,6 +43,10 @@ public class TeacherController {
                 printTeachers();
             }else if(command.toLowerCase().equals("add")){
                 inputTeachers();
+            }else if(command.toLowerCase().equals("delete")){
+                deleteTeacher();
+            }else if(command.toLowerCase().equals("detail")){
+                detailTeacher();
             }else if(command.toLowerCase().equals("quit")) {
                 break;
             }                    
@@ -93,6 +97,10 @@ public class TeacherController {
             System.out.print("강의과목(예: 자바, C, C++) : ");
             m.setSubjects(keyIn.nextLine());
             
+            if(teacherIndex == teachers.length) {
+                increaseStorage();
+            }
+             
             teachers[teacherIndex++] = m;
             
                        
@@ -102,4 +110,50 @@ public class TeacherController {
                 break;
         }
     }
+    
+    private static void increaseStorage() {
+        Teacher[] newList = new Teacher[teachers.length+3];
+        for(int i = 0 ; i < teachers.length ; i++) {
+            newList[i] = teachers[i];
+        }
+        
+        teachers = newList;
+    }
+    
+    private static void deleteTeacher() {
+        System.out.print("삭제할 번호 : ");
+        int no = Integer.parseInt(keyIn.nextLine());
+        
+        if( no < 0 || no >= teacherIndex) {
+            System.out.println("존재하지 않는 번호입니다.");
+            return;
+        }
+        
+        for(int i = no ; i <= teacherIndex - 2 ; i++) {
+            teachers[i] = teachers[i+1];
+        }
+        teacherIndex--;
+        
+        System.out.println("삭제 되었습니다.");
+    }
+    
+    private static void detailTeacher() {
+        System.out.print("조회할 번호 : ");
+        int no = Integer.parseInt(keyIn.nextLine());
+        
+        if( no < 0 || no >= teacherIndex) {
+            System.out.println("존재하지 않는 번호입니다.");
+            return;
+        }
+        
+        System.out.printf("이름 : %s\n", teachers[no].getName());
+        System.out.printf("이메일 : %s\n", teachers[no].getEmail());
+        System.out.printf("패스워드 : %s\n", teachers[no].getPassword());
+        System.out.printf("전화 : %s\n", teachers[no].getTel());
+        System.out.printf("시급 : %d\n", teachers[no].getPay());
+        System.out.printf("강의과목 : %s\n", teachers[no].getSubjects());
+        
+    }
+    
+    
 }
