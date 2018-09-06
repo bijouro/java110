@@ -3,6 +3,11 @@ import java.util.Scanner;
 import bitcamp.java110.cms.control.ManagerController;
 import bitcamp.java110.cms.control.StudentController;
 import bitcamp.java110.cms.control.TeacherController;
+import bitcamp.java110.cms.domain.Manager;
+import bitcamp.java110.cms.domain.Student;
+import bitcamp.java110.cms.domain.Teacher;
+import bitcamp.java110.cms.util.ArrayList;
+import bitcamp.java110.cms.util.LinkedList;
 
 public class App {
     
@@ -11,9 +16,9 @@ public class App {
     
     public static void main(String[] args) {
         
-        StudentController sc = new StudentController(keyIn);
-        TeacherController tc = new TeacherController(keyIn);
-        ManagerController mc = new ManagerController(keyIn);
+        StudentController sc = new StudentController(keyIn, new LinkedList<Student>());
+        TeacherController tc = new TeacherController(keyIn, new ArrayList<Teacher>());
+        ManagerController mc = new ManagerController(keyIn, new ArrayList<Manager>());
         sc.keyIn = keyIn;
         tc.keyIn = keyIn;
         mc.keyIn = keyIn;
