@@ -1,20 +1,20 @@
 package bitcamp.java110.cms.control;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Student;
 
 public class StudentController implements Controller{
-    
-    //private  ArrayList<Student> students = new ArrayList<>();    
-    private  List<Student> students;
-    
-    public StudentController( List<Student> students) {
 
-        this.students = students;
+    public String name = "1";
+    //private  ArrayList<Student> students = new ArrayList<>();    
+    private  List<Student> students = new ArrayList<>();;
+
+    public StudentController( ) {
         init();
     }
-     
+
     public void service(Scanner keyIn) {
         while(true) {     
             System.out.print("학생관리 > ");
@@ -36,7 +36,7 @@ public class StudentController implements Controller{
         }
     }
 
-     
+
     private void printStudents() {
 
         for(int i = 0; i < students.size(); i++) {
@@ -52,31 +52,31 @@ public class StudentController implements Controller{
                     );
         }
     }
-    
+
     private void inputStudents(Scanner keyIn) {
         while(true) {
             Student m = new Student();
-            
+
             System.out.print("이름: ");
             m.setName(keyIn.nextLine());
-            
+
             System.out.print("이메일: ");
             m.setEmail(keyIn.nextLine());
-            
+
             System.out.print("패스워드: ");
             m.setPassword(keyIn.nextLine());
-            
+
             System.out.print("최종학력: ");
             m.setSchool(keyIn.nextLine());
-            
+
             System.out.print("재직여부(true/false) : ");
             m.setWorking(Boolean.parseBoolean(keyIn.nextLine()));
-            
+
             System.out.print("전화 : ");
             m.setTel(keyIn.nextLine());
-            
+
             students.add(m);
-                       
+
             System.out.print("계속 하시겠습니까? (Y/n) ");
             String answer = keyIn.nextLine();
             if(answer.toLowerCase().equals("n"))
@@ -88,54 +88,54 @@ public class StudentController implements Controller{
     private void deleteStudent(Scanner keyIn) {
         System.out.print("삭제할 번호 : ");
         int no = Integer.parseInt(keyIn.nextLine());
-        
+
         if( no < 0 || no >= students.size()) {
             System.out.println("존재하지 않는 번호입니다.");
             return;
         }
         students.remove(no);
-        
+
         System.out.println("삭제 되었습니다.");
     }
-    
+
     private void detailStudent(Scanner keyIn) {
         System.out.print("조회할 번호 : ");
         int no = Integer.parseInt(keyIn.nextLine());
-        
+
         if( no < 0 || no >= students.size()) {
             System.out.println("존재하지 않는 번호입니다.");
             return;
         }
-        
+
         Student student = students.get(no);
-        
-        
+
+
         System.out.printf("이름 : %s\n", student.getName());
         System.out.printf("이메일 : %s\n", student.getEmail());
         System.out.printf("패스워드 : %s\n", student.getPassword());
         System.out.printf("최종학력 : %s\n", student.getSchool());
         System.out.printf("전화 : %s\n", student.getTel());
         System.out.printf("재직여부 : %b\n", student.isWorking());
-        
+
     }
-    
+
     private void init(){  // 인스턴스 블럭 생성자 보다 먼저 실행      
         Student s = new Student();
         s.setName("A");
         students.add(s);
-        
+
         s = new Student();
         s.setName("B");
         students.add(s);
-        
+
         s = new Student();
         s.setName("C");
         students.add(s);
-        
+
         s = new Student();
         s.setName("D");
         students.add(s);
-        
+
         s = new Student();
         s.setName("E");
         students.add(s);        
