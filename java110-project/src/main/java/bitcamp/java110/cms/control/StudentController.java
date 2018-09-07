@@ -4,31 +4,29 @@ import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Student;
 
-public class StudentController {
+public class StudentController implements Controller{
     
     //private  ArrayList<Student> students = new ArrayList<>();    
     private  List<Student> students;
-    public  Scanner keyIn;
     
-    public StudentController(Scanner keyIn, List<Student> students) {
-       
-        this.keyIn = keyIn;
+    public StudentController( List<Student> students) {
+
         this.students = students;
         init();
     }
-    
-    public void serviceStudentMenu() {
+     
+    public void service(Scanner keyIn) {
         while(true) {     
             System.out.print("학생관리 > ");
             String command = keyIn.nextLine();
             if(command.toLowerCase().equals("list")) {
                 printStudents();
             }else if(command.toLowerCase().equals("add")){
-                inputStudents();
+                inputStudents(keyIn);
             }else if(command.toLowerCase().equals("delete")){
-                deleteStudent();
+                deleteStudent(keyIn);
             }else if(command.toLowerCase().equals("detail")){
-                detailStudent();
+                detailStudent(keyIn);
             }else if(command.toLowerCase().equals("quit")) {
                 break;
             }                    
@@ -55,7 +53,7 @@ public class StudentController {
         }
     }
     
-    private void inputStudents() {
+    private void inputStudents(Scanner keyIn) {
         while(true) {
             Student m = new Student();
             
@@ -87,7 +85,7 @@ public class StudentController {
     } 
 
 
-    private void deleteStudent() {
+    private void deleteStudent(Scanner keyIn) {
         System.out.print("삭제할 번호 : ");
         int no = Integer.parseInt(keyIn.nextLine());
         
@@ -100,7 +98,7 @@ public class StudentController {
         System.out.println("삭제 되었습니다.");
     }
     
-    private void detailStudent() {
+    private void detailStudent(Scanner keyIn) {
         System.out.print("조회할 번호 : ");
         int no = Integer.parseInt(keyIn.nextLine());
         

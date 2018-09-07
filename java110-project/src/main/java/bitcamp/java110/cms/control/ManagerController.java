@@ -5,28 +5,27 @@ import java.util.Scanner;
 import bitcamp.java110.cms.domain.Manager;
 
 
-public class ManagerController {
+public class ManagerController implements Controller{
 
     private List<Manager> managers;
-    public Scanner keyIn;
+   
     
-    public ManagerController(Scanner keyIn, List<Manager> managers) {
-        this.keyIn = keyIn;
+    public ManagerController(List<Manager> managers) {
         this.managers = managers;
     }
     
-    public void serviceManagerMenu() {
+    public void service(Scanner keyIn) {
         while(true) {     
             System.out.print(" 매니저 관리 > ");
             String command = keyIn.nextLine();
             if(command.toLowerCase().equals("list")) {
                 printManagers();
             }else if(command.toLowerCase().equals("add")){
-                inputManagers();
+                inputManagers(keyIn);
             }else if(command.toLowerCase().equals("delete")){
-                deleteManager();
+                deleteManager(keyIn);
             }else if(command.toLowerCase().equals("detail")){
-                detailManager();
+                detailManager(keyIn);
             }else if(command.toLowerCase().equals("quit")) {
                 break;
             }                    
@@ -50,7 +49,7 @@ public class ManagerController {
         }
     }
         
-    private void inputManagers() {
+    private void inputManagers(Scanner keyIn) {
         while(true) {
             Manager m = new Manager();
             
@@ -79,7 +78,7 @@ public class ManagerController {
     }
     
   
-    private void deleteManager() {
+    private void deleteManager(Scanner keyIn) {
         System.out.print("삭제할 번호 : ");
         int no = Integer.parseInt(keyIn.nextLine());
         
@@ -94,7 +93,7 @@ public class ManagerController {
     }
     
     
-    private void detailManager() {
+    private void detailManager(Scanner keyIn) {
         System.out.print("조회할 번호 : ");
         int no = Integer.parseInt(keyIn.nextLine());
         

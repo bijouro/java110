@@ -4,27 +4,27 @@ import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Teacher;
 
-public class TeacherController {
+public class TeacherController implements Controller{
 
     private List<Teacher> teachers;
-    public Scanner keyIn;
     
-    public TeacherController(Scanner keyIn, List<Teacher> teachers) {
-        this.keyIn = keyIn;
+    
+    public TeacherController(List<Teacher> teachers) {
+    
         this.teachers = teachers;
     }
-    public void serviceTeacherMenu() {
+    public void service(Scanner keyIn) {
         while(true) {     
             System.out.print("강사관리 > ");
             String command = keyIn.nextLine();
             if(command.toLowerCase().equals("list")) {
                 printTeachers();
             }else if(command.toLowerCase().equals("add")){
-                inputTeachers();
+                inputTeachers(keyIn);
             }else if(command.toLowerCase().equals("delete")){
-                deleteTeacher();
+                deleteTeacher(keyIn);
             }else if(command.toLowerCase().equals("detail")){
-                detailTeacher();
+                detailTeacher(keyIn);
             }else if(command.toLowerCase().equals("quit")) {
                 break;
             }                    
@@ -51,7 +51,7 @@ public class TeacherController {
     
 
     
-    private void inputTeachers() {
+    private void inputTeachers(Scanner keyIn) {
         while(true) {
             Teacher m = new Teacher();
             
@@ -84,7 +84,7 @@ public class TeacherController {
     
 
     
-    private void deleteTeacher() {
+    private void deleteTeacher(Scanner keyIn) {
         System.out.print("삭제할 번호 : ");
         int no = Integer.parseInt(keyIn.nextLine());
         
@@ -98,7 +98,7 @@ public class TeacherController {
         System.out.println("삭제 되었습니다.");
     }
     
-    private void detailTeacher() {
+    private void detailTeacher(Scanner keyIn) {
         System.out.print("조회할 번호 : ");
         int no = Integer.parseInt(keyIn.nextLine());
         
