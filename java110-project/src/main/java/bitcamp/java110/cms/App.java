@@ -7,13 +7,15 @@ import bitcamp.java110.cms.annotation.RequestMapping;
 import bitcamp.java110.cms.context.ApplicationContext;
 import bitcamp.java110.cms.context.RequestMappingHandlerMapping;
 import bitcamp.java110.cms.context.RequestMappingHandlerMapping.RequestMappingHandler;
+import bitcamp.java110.cms.dao.StudentDao;
 import bitcamp.java110.cms.domain.Manager;
-import bitcamp.java110.cms.domain.Student;
 import bitcamp.java110.cms.domain.Teacher;
 
 public class App {
 
-    public static ArrayList<Student> students = new ArrayList<>();
+    public static StudentDao studentDao = new StudentDao();
+    //public static ManagerDao managerDao = new ManagerDao();
+    //public static TeacherDao teacherDao = new TeacherDao();
     public static ArrayList<Manager> managers = new ArrayList<>();
     public static ArrayList<Teacher> teachers = new ArrayList<>();
     
@@ -73,7 +75,6 @@ public class App {
 
     private static String prompt() {
         // 사용자로부터 메뉴를 입력받기
-
 
         System.out.print("메뉴 > ");
         return keyIn.nextLine();

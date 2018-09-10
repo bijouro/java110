@@ -11,7 +11,6 @@ import bitcamp.java110.cms.domain.Student;
 @Component
 public class StudentAddController {
 
-
     @RequestMapping("student/add") 
     public void add(Scanner keyIn) {
         while(true) {
@@ -35,7 +34,11 @@ public class StudentAddController {
             System.out.print("전화 : ");
             m.setTel(keyIn.nextLine());
 
-            App.students.add(m);
+            if(App.studentDao.insert(m) > 0) {
+                System.out.println("저장하였습니다.");
+            }else{
+                System.out.println("같은 이메일의 학생이 존재합니다.");
+            };
 
             System.out.print("계속 하시겠습니까? (Y/n) ");
             String answer = keyIn.nextLine();
@@ -47,23 +50,28 @@ public class StudentAddController {
     {  // 인스턴스 블럭 생성자 보다 먼저 실행      
         Student s = new Student();
         s.setName("A");
-        App.students.add(s);
+        s.setEmail("a@test.com");
+        App.studentDao.insert(s);
 
         s = new Student();
         s.setName("B");
-        App.students.add(s);
+        s.setEmail("B@test.com");
+        App.studentDao.insert(s);
 
         s = new Student();
         s.setName("C");
-        App.students.add(s);
+        s.setEmail("C@test.com");
+        App.studentDao.insert(s);
 
         s = new Student();
         s.setName("D");
-        App.students.add(s);
+        s.setEmail("D@test.com");
+        App.studentDao.insert(s);
 
         s = new Student();
         s.setName("E");
-        App.students.add(s);        
+        s.setEmail("E@test.com");
+        App.studentDao.insert(s);        
     }
 
 
