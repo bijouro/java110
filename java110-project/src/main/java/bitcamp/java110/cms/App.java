@@ -7,11 +7,15 @@ import bitcamp.java110.cms.annotation.RequestMapping;
 import bitcamp.java110.cms.context.ApplicationContext;
 import bitcamp.java110.cms.context.RequestMappingHandlerMapping;
 import bitcamp.java110.cms.context.RequestMappingHandlerMapping.RequestMappingHandler;
+import bitcamp.java110.cms.domain.Manager;
 import bitcamp.java110.cms.domain.Student;
+import bitcamp.java110.cms.domain.Teacher;
 
 public class App {
 
     public static ArrayList<Student> students = new ArrayList<>();
+    public static ArrayList<Manager> managers = new ArrayList<>();
+    public static ArrayList<Teacher> teachers = new ArrayList<>();
     
     static Scanner keyIn = new Scanner(System.in);
 
@@ -72,7 +76,6 @@ public class App {
 
 
         System.out.print("메뉴 > ");
-
         return keyIn.nextLine();
 
     }
