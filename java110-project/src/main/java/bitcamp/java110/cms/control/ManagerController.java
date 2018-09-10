@@ -3,14 +3,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.domain.Manager;
 
-
+@Component("3")
 public class ManagerController implements Controller{
 
     private List<Manager> managers = new ArrayList<>();
 
-    public String name = "3";
+    //public String name = "3";
     public void service(Scanner keyIn) {
         while(true) {     
             System.out.print(" 매니저 관리 > ");
