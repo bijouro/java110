@@ -1,7 +1,8 @@
+import java.lang.reflect.Method;
 import java.util.Scanner;
 
+import bitcamp.java110.cms.annotation.RequestMapping;
 import bitcamp.java110.cms.context.ApplicationContext;
-import bitcamp.java110.cms.control.Controller;
 
 public class App {
 
@@ -24,33 +25,56 @@ public class App {
 
 
         while(true) {
-            String menu = promptMenu();
+            String menu = prompt();
 
-            if(menu.equals("0")) {
+            if(menu.equals("exit")) {
                 System.out.println("안녕히 가세요!");
                 break;
             }
 
-            Controller controller = (Controller)iocContainer.getBean(menu);
-            if(controller != null) {
-                controller.service(keyIn);
-            }else {
+            Object controller = iocContainer.getBean(menu);
+            if ( controller == null) {
                 System.out.println("해당 메뉴가 없습니다.");
+                continue;
             }
-
+            
+            Method method = findRequestMapping(controller.getClass());
+            
+            if(method == null) {
+                System.out.println("해당 메뉴가 없습니다.");
+                continue;
+            }
+            
+            method.invoke(controller, keyIn);
         }
 
         keyIn.close();
     }    
 
-    private static String promptMenu() {
+    private static Method findRequestMapping(Class<?> clazz) {
+
+        // 클래스의 메서드 목록을 꺼낸다.
+        
+        Method[] methods = clazz.getDeclaredMethods();
+        for(Method m : methods) {
+            
+            // 매서드에서 @RequestMapping 정보를 추출한다.
+            RequestMapping anno = m.getAnnotation(RequestMapping.class);
+            if (anno != null){
+                // 메서드를 찾으면 리턴한다.
+                return m;
+            }
+        }
+
+        return null;
+    }
+
+    private static String prompt() {
         // 사용자로부터 메뉴를 입력받기
-        System.out.println("[메뉴]");
-        System.out.println("1. 학생관리");
-        System.out.println("2. 강사관리");
-        System.out.println("3. 매니저 관리");
-        System.out.println("0. 종료");
-        System.out.print("메뉴 번호 > ");
+
+        
+        System.out.print("메뉴 > ");
+        
         return keyIn.nextLine();
 /*        while(true) {
             System.out.print("메뉴 번호 > ");
