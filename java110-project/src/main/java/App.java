@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 import bitcamp.java110.cms.annotation.RequestMapping;
 import bitcamp.java110.cms.context.ApplicationContext;
+import bitcamp.java110.cms.context.RequestMappingHandlerMapping;
+import bitcamp.java110.cms.context.RequestMappingHandlerMapping.RequestMappingHandler;
 
 public class App {
 
@@ -23,6 +25,17 @@ public class App {
         ApplicationContext iocContainer = 
                 new ApplicationContext("bitcamp.java110.cms.control");
 
+        
+        RequestMappingHandlerMapping requestHandlerMap = new RequestMappingHandlerMapping();
+        // Ioc 컨테이너에 보관된 객체의 이름 목록을 가져온다.    
+        
+        
+        String[] names = iocContainer.getBeanDefinitionNames();
+        for(String name : names) {
+            Object obj = iocContainer.getBean(name);            
+            // 객체에서 @RequestMapping이 붙은 매서드를 찾아 저장한다.
+            requestHandlerMap.addMapping(obj);            
+        }
 
         while(true) {
             String menu = prompt();
@@ -31,23 +44,13 @@ public class App {
                 System.out.println("안녕히 가세요!");
                 break;
             }
-
-            Object controller = iocContainer.getBean(menu);
-            if ( controller == null) {
+            RequestMappingHandler mapping = requestHandlerMap.getMapping(menu);
+            if ( mapping == null) {
                 System.out.println("해당 메뉴가 없습니다.");
                 continue;
             }
-            
-            Method method = findRequestMapping(controller.getClass());
-            
-            if(method == null) {
-                System.out.println("해당 메뉴가 없습니다.");
-                continue;
-            }
-            
-            method.invoke(controller, keyIn);
+            mapping.getMethod().invoke(mapping.getInstance(), keyIn);
         }
-
         keyIn.close();
     }    
 
