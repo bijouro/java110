@@ -10,7 +10,7 @@ import bitcamp.java110.cms.domain.Student;
 
 @Component
 public class StudentAddController {
-
+ 
     StudentDao studentDao;
     @Autowired
     public void setStudentDao(StudentDao studentDao) {
