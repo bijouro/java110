@@ -2,13 +2,23 @@ package bitcamp.java110.cms.control.manager;
 
 import java.util.Scanner;
 
-import bitcamp.java110.cms.App;
+import bitcamp.java110.cms.annotation.Autowired;
 import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.annotation.RequestMapping;
+import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.domain.Manager;
+
 
 @Component
 public class ManagerAddController {
+
+    ManagerDao managerDao;
+
+    @Autowired
+    public void setManagerDao(ManagerDao managerDao) {
+        this.managerDao = managerDao;
+    }
+
     @RequestMapping("manager/add") 
     public void add(Scanner keyIn) {
         while(true) {
@@ -29,7 +39,11 @@ public class ManagerAddController {
             System.out.print("직위 : ");
             m.setPosition(keyIn.nextLine());   
 
-            App.managers.add(m);
+            if(managerDao.insert(m) > 0) {
+                System.out.println("저장하였습니다.");
+            }else{
+                System.out.println("같은 이메일의 학생이 존재합니다.");
+            };
 
             System.out.print("계속 하시겠습니까? (Y/n) ");
             String answer = keyIn.nextLine();
@@ -37,5 +51,5 @@ public class ManagerAddController {
                 break;
         }
     }
-    
+
 }

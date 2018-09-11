@@ -4,28 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bitcamp.java110.cms.annotation.Component;
-import bitcamp.java110.cms.domain.Student;
+import bitcamp.java110.cms.domain.Teacher;
 @Component
-public class StudentDao {
-
-    private List<Student> list = new ArrayList<>();
+public class TeacherDao {
+ private List<Teacher> list = new ArrayList<>();
     
-    public int insert(Student student) {
-        for(Student item : list) {
-            if(item.getEmail().equals(student.getEmail())) {
+    public int insert(Teacher teacher) {
+        for(Teacher item : list) {
+            if(item.getEmail().equals(teacher.getEmail())) {
                 return 0;
             }
         }
-        list.add(student);
+        list.add(teacher);
         return 1;
     }
     
-    public List<Student> findAll() {
+    public List<Teacher> findAll() {
         return list;        
     }
     
-    public Student findByEmail(String email) {
-        for(Student item : list) {
+    public Teacher findByEmail(String email) {
+        for(Teacher item : list) {
             if(item.getEmail().equals(email)) {
                 return item;
             }
@@ -35,7 +34,7 @@ public class StudentDao {
     
    
     public int delete(String email) {
-        for(Student item : list) {
+        for(Teacher item : list) {
             if(item.getEmail().equals(email)) {
                 list.remove(item);
                 return 1;
