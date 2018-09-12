@@ -8,16 +8,17 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.domain.Manager;
-@Component
+//@Component
 public class ManagerFileDao implements ManagerDao{
 
+    String filename = "data/manager2.dat";
+    
     private List<Manager> list = new ArrayList<>();
 
     public ManagerFileDao() {
-        File dataFile = new File("data/manager.dat");
+        File dataFile = new File(filename);
         try (
                 BufferedReader in = 
                 new BufferedReader(new FileReader(dataFile))
@@ -44,7 +45,7 @@ public class ManagerFileDao implements ManagerDao{
     }
 
     private void save() {
-        File dataFile = new File("data/manager.dat");
+        File dataFile = new File(filename);
         try (
             BufferedWriter out = 
                 new BufferedWriter(new FileWriter(dataFile))

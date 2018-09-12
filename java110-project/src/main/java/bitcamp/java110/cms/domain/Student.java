@@ -1,5 +1,6 @@
 package bitcamp.java110.cms.domain;
 
+@SuppressWarnings("serial")
 public class Student extends Member{
     protected String school;
     protected boolean working;

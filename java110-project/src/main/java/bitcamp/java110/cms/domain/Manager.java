@@ -1,7 +1,9 @@
 package bitcamp.java110.cms.domain;
 
-public class Manager extends Member{
+@SuppressWarnings("serial")
+public class Manager extends Member {
     
+
     protected String tel;
     protected String position;
     public String getTel() {
