@@ -8,7 +8,6 @@ import bitcamp.java110.cms.annotation.RequestMapping;
 import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.domain.Manager;
 
-
 @Component
 public class ManagerAddController {
 
@@ -37,17 +36,9 @@ public class ManagerAddController {
             m.setTel(keyIn.nextLine());
 
             System.out.print("직위 : ");
-            m.setPosition(keyIn.nextLine());   
-            int rtval = 0;
-            if((rtval = managerDao.insert(m)) > 0) {
-                System.out.println("저장하였습니다.");
-            }else if(rtval == -1){
-                System.out.println("필수 입력값이 누락되었습니다.");
-            }else if(rtval == -2){
-                System.out.println("같은 이메일의 매니저가 존재합니다.");
-            }else{
-                System.out.println("알수 없는 오류가 발생하였습니다.");
-            };
+            m.setPosition(keyIn.nextLine());
+
+            managerDao.insert(m);
 
             System.out.print("계속 하시겠습니까? (Y/n) ");
             String answer = keyIn.nextLine();

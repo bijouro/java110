@@ -148,10 +148,7 @@ public class ApplicationContext {
         }
     }
 
-    private void injectDependency() {
-        // objPool에 보관된 객체 목록을 꺼낸다.
 
-    }
 
     private void callBeanPostProcessor() {
 
