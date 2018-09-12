@@ -11,7 +11,7 @@ import java.util.List;
 import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.dao.TeacherDao;
 import bitcamp.java110.cms.domain.Teacher;
-@Component
+//@Component
 public class TeacherFileDao implements TeacherDao {
  private List<Teacher> list = new ArrayList<>();
     

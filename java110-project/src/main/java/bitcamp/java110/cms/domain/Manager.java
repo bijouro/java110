@@ -1,9 +1,9 @@
 package bitcamp.java110.cms.domain;
 
-@SuppressWarnings("serial")
-public class Manager extends Member {
-    
 
+public class Manager extends Member {
+
+    private static final long serialVersionUID = 1L;
     protected String tel;
     protected String position;
     public String getTel() {

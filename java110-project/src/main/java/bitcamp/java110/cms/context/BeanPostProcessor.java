@@ -1,8 +1,5 @@
 package bitcamp.java110.cms.context;
 
-import java.util.Map;
-
-
 // 이규칙은
 // IoC 컨테이너(ApplicationContext)가 객체들을 생성한 후에
 // 마무리 작업을 수행하는 객체에 대해 호출한다.

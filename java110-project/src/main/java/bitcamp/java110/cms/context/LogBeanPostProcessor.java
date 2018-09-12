@@ -1,9 +1,7 @@
 package bitcamp.java110.cms.context;
 
-import java.lang.reflect.Method;
 import java.util.Collection;
 
-import bitcamp.java110.cms.annotation.Autowired;
 import bitcamp.java110.cms.annotation.Component;
 
 @Component
