@@ -24,6 +24,7 @@ public class StudentListController {
         List<Student> list = studentDao.findAll();
         
         for(Student s : list) {
+            
             System.out.printf("%d, %s, %s, %s, %s, %b, %s \n",
                     s.getNo(),
                     s.getName(), 

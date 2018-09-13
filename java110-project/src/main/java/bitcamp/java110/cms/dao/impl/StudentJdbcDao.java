@@ -129,10 +129,11 @@ public class StudentJdbcDao implements StudentDao{
                 mgr.setEmail(rs.getString("email"));
                 mgr.setName(rs.getString("name"));
                 mgr.setSchool(rs.getString("schl"));
-                mgr.setWorking((rs.getString("work")=="Y"?true:false));
+                mgr.setWorking((rs.getString("work").toUpperCase().equals("Y")?true:false));
                 list.add(mgr);
+                
             }
-
+            
         }catch(Exception e) {
 
             throw new DaoException(e);
@@ -197,7 +198,7 @@ public class StudentJdbcDao implements StudentDao{
                 mgr.setName(rs.getString("name"));
                 mgr.setTel(rs.getString("tel"));
                 mgr.setSchool(rs.getString("schl"));
-                mgr.setWorking((rs.getString("work")=="Y"?true:false));
+                mgr.setWorking((rs.getString("work").toUpperCase().equals("Y")?true:false));
                 return mgr;
             }
 
@@ -263,7 +264,7 @@ public class StudentJdbcDao implements StudentDao{
                 mgr.setName(rs.getString("name"));
                 mgr.setTel(rs.getString("tel"));
                 mgr.setSchool(rs.getString("schl"));
-                mgr.setWorking((rs.getString("work")=="Y"?true:false));
+                mgr.setWorking((rs.getString("work").toUpperCase().equals("Y")?true:false));
                 return mgr;
             }
 
