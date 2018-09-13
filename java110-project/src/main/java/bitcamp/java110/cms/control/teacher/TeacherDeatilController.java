@@ -19,13 +19,13 @@ public class TeacherDeatilController{
     
     @RequestMapping("teacher/detail")
     public void detail(Scanner keyIn) {
-        System.out.print("조회할 학생의 이메일 : ");
+        System.out.print("조회할 강사의 이메일 : ");
         String email = keyIn.nextLine();
 
         Teacher teacher = teacherDao.findByEmail(email);
 
         if(teacher == null) {
-            System.out.println("해당 이메일이 학생정보가 존재하지 않습니다.");
+            System.out.println("해당 이메일이 강사정보가 존재하지 않습니다.");
             return;
         }
 

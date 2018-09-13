@@ -1,6 +1,16 @@
 # java110-project
 
-## v2.1
+## v2.3
+
+ - DAO에 JDBC 적용
+ - 작업
+     - Data modeling과 forward engineering 수행
+     - 테이블 준비
+     - jDBC API 활용
+     - 트랜젝션 다루기
+
+
+## v2.2
  - 예외처리 적용
  - 예외처리 문법이 없던 시절
      - 리턴 값으로 예외상황을 호출자에게 알렸다.
