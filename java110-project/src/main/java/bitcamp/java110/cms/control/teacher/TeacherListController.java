@@ -25,7 +25,8 @@ public class TeacherListController{
         List<Teacher> list = teacherDao.findAll();
         
         for(Teacher s : list) {
-            System.out.printf("%s, %s, %s, %s, %d, [%s] \n", 
+            System.out.printf("%d, %s, %s, %s, %s, %d, [%s] \n",
+                    s.getNo(),
                     s.getName(), 
                     s.getEmail(), 
                     s.getPassword(),

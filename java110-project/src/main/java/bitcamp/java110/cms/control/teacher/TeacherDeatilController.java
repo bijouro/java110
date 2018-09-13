@@ -19,16 +19,16 @@ public class TeacherDeatilController{
     
     @RequestMapping("teacher/detail")
     public void detail(Scanner keyIn) {
-        System.out.print("조회할 강사의 이메일 : ");
-        String email = keyIn.nextLine();
+        System.out.print("조회할 강사 번호 : ");
+        int no = Integer.parseInt(keyIn.nextLine());
 
-        Teacher teacher = teacherDao.findByEmail(email);
+        Teacher teacher = teacherDao.findByNo(no);
 
         if(teacher == null) {
-            System.out.println("해당 이메일이 강사정보가 존재하지 않습니다.");
+            System.out.println("해당 번호의 강사정보가 존재하지 않습니다.");
             return;
         }
-
+        System.out.printf("번호 : %d\n", teacher.getNo());
         System.out.printf("이름 : %s\n", teacher.getName());
         System.out.printf("이메일 : %s\n", teacher.getEmail());
         System.out.printf("패스워드 : %s\n", teacher.getPassword());

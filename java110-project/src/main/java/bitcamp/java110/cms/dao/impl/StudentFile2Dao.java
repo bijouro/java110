@@ -15,7 +15,7 @@ import bitcamp.java110.cms.dao.DuplicationDaoException;
 import bitcamp.java110.cms.dao.MandatoryValueDaoException;
 import bitcamp.java110.cms.dao.StudentDao;
 import bitcamp.java110.cms.domain.Student;
-@Component
+//@Component
 public class StudentFile2Dao implements StudentDao{
 
     private List<Student> list = new ArrayList<>();
