@@ -42,6 +42,7 @@ public class App {
                 mapping.getMethod().invoke(mapping.getInstance(), keyIn);    
             }catch(Exception e) {
                 System.out.println("실행 오류");
+                e.printStackTrace();
                 System.out.println(e.getCause()); 
 
             }

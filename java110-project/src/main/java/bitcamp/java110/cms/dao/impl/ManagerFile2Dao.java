@@ -15,7 +15,7 @@ import bitcamp.java110.cms.dao.DuplicationDaoException;
 import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.dao.MandatoryValueDaoException;
 import bitcamp.java110.cms.domain.Manager;
-@Component
+//@Component
 public class ManagerFile2Dao implements ManagerDao{
 
     private List<Manager> list = new ArrayList<>();
