@@ -11,29 +11,25 @@ import bitcamp.java110.cms.domain.Student;
 
 @Component
 public class StudentListController {
-
+    
     StudentDao studentDao;
+    
     @Autowired
     public void setStudentDao(StudentDao studentDao) {
         this.studentDao = studentDao;
     }
-    
-    @RequestMapping("student/list") 
-    public void list(Scanner keyIn) {
 
+    @RequestMapping("student/list")
+    public void list(Scanner keyIn) {
         List<Student> list = studentDao.findAll();
         
-        for(Student s : list) {
-            
-            System.out.printf("%d, %s, %s, %s, %s, %b, %s \n",
+        for (Student s : list) {
+            System.out.printf("%d, %s, %s, %s, %b\n",
                     s.getNo(),
                     s.getName(), 
                     s.getEmail(), 
-                    s.getPassword(),
                     s.getSchool(),
-                    s.isWorking(),
-                    s.getTel()
-                    );
+                    s.isWorking());
         }
     }
 }

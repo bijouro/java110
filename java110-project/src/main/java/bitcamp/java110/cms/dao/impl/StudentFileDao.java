@@ -33,7 +33,6 @@ public class StudentFileDao implements StudentDao {
                 s.setName(values[1]);
                 s.setPassword(values[2]);
                 s.setSchool(values[3]);
-                
                 s.setTel(values[4]);
                 s.setWorking(Boolean.parseBoolean(values[5]));
                 
