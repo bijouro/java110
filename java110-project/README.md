@@ -1,5 +1,13 @@
 # java110-project
 
+## v2.6
+
+ - Client/Server 구조로 변경
+ - Socket Programming 구현
+ - Multi Thread 구현
+ - Protocol 개념 이해
+
+ 
 ## v2.5
  - Spring IoC 컨테이너 도입
  - 기존에 만들었던 ApplicationContext 대신에 Spring 프레임워크에서 제공하는 ApplicationContext 사용하기
@@ -9,6 +17,10 @@
         - " > gradle eclpise " 실행
      - Spring 설정 파일 추가 ( application-context.xml )
         - bitcamp.java110.cms.conf 패키지에 application-context.xml 생성
+     - 기존의 ApplicationContext 관련 클래스를 제거한다.
+     - 기존의 @Autowired, @Component 어노테이션을 제거한다.
+     
+
 ## v2.4
  
  - DB 커넥션 공유하기

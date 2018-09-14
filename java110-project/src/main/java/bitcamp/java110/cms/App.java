@@ -19,8 +19,6 @@ public class App {
                         "bitcamp/java110/cms/conf/application-context.xml");
         
         // IoC 컨테이너가 생성한 객체 조회하기.
-        
-        
 
         RequestMappingHandlerMapping requestHandlerMap = 
                 new RequestMappingHandlerMapping();
@@ -62,7 +60,7 @@ public class App {
     }
 
     private static String prompt() {
-        System.out.print("메뉴> ");
+        System.out.printf("메뉴> ");
         return keyIn.nextLine();
     }
 }
