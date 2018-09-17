@@ -7,42 +7,41 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class ClientApp {
-    
+
     static Scanner keyIn = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
-        
-        try (
-            // 서버에 연결하기
-            Socket socket = new Socket("192.168.0.11", 8888);
+
+        while (true) {
+            // 사용자로부터 명령어를 입력받는다.
             
-            // 서버에 데이터를 보내고 읽을 도구를 준비하기
-            PrintStream out = new PrintStream(
-                                new BufferedOutputStream(
-                                        socket.getOutputStream()));
-            BufferedReader in = new BufferedReader(
-                               new InputStreamReader(
-                                  socket.getInputStream()));
-        ) {
-            out.println("HELLO"); out.flush();
-            System.out.println(in.readLine());
+            String requestLine = prompt();
+            if (requestLine.equals("EXIT")){
+                break;
+            }
             
-            while (true) {
-                String requestLine = prompt();
+            try (
+                    Socket socket = new Socket("localhost", 8888);
+                    PrintStream out = new PrintStream(
+                            new BufferedOutputStream(
+                                    socket.getOutputStream()));
+                    BufferedReader in = new BufferedReader(
+                            new InputStreamReader(
+                                    socket.getInputStream()));
+             ) {
+                // 입력 받은 명령어를 서버에 보낸다.
                 out.println(requestLine); out.flush();
+                
+                // 서버가 응답한 내용을 받아서 출력한다.
                 while (true) {
                     String responseLine = in.readLine();
                     System.out.println(responseLine);
                     if (responseLine.length() == 0)
                         break;
                 }
-                if (requestLine.equals("EXIT")){
-                    break;
-                } 
             }
-            
         }
-        
+
         keyIn.close();
     }
 
@@ -51,25 +50,3 @@ public class ClientApp {
         return keyIn.nextLine();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

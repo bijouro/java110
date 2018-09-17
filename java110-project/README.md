@@ -1,7 +1,12 @@
 # java110-project
 
-##
-- Multi Thread 적용하기
+
+
+## 2.8
+- Multi Thread 적용하기(Connection-Oriented에서 stateless 방식으로 요청 처리)
+
+## 2.7
+- Multi Thread 적용하기(Connection-Oriented에서 stateful 방식으로 요청 처리)
 - 별도의 Thread를 만들어 Client의 요청을 처리 하게 한다.
 - 즉 동시에 여러 클라이언트의 요청을 처리한다.
 
