@@ -1,10 +1,15 @@
 # java110-project
 
+##
+- Multi Thread 적용하기
+- 별도의 Thread를 만들어 Client의 요청을 처리 하게 한다.
+- 즉 동시에 여러 클라이언트의 요청을 처리한다.
+
 ## v2.6
 
  - Client/Server 구조로 변경
  - Socket Programming 구현
- - Multi Thread 구현
+ - Protocol 개념 이해 
   
 ## v2.5
  - Spring IoC 컨테이너 도입
