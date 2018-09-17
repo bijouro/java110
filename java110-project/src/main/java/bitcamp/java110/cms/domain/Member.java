@@ -9,7 +9,14 @@ public class Member implements Serializable {
     protected String name;
     protected String email;
     protected String password;
+    protected String tel;
     
+    public String getTel() {
+        return tel;
+    }
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
     public int getNo() {
         return no;
     }

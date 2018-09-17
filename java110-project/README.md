@@ -5,9 +5,7 @@
  - Client/Server 구조로 변경
  - Socket Programming 구현
  - Multi Thread 구현
- - Protocol 개념 이해
-
- 
+  
 ## v2.5
  - Spring IoC 컨테이너 도입
  - 기존에 만들었던 ApplicationContext 대신에 Spring 프레임워크에서 제공하는 ApplicationContext 사용하기

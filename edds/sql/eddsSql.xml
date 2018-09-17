@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EDDS">
+
+	<select id="selectListTest" resultType="java.util.HashMap">
+		select FILE_ID
+		from doc_dstrb_log
+	</select>	
+	
+	<!--  LDAP BATCH -->
+	<insert id="insertLdapDataList"><![CDATA[
+		INSERT INTO LDAP_BATCH_LOG 
+			(START_TIME,STATE, RDATE, MDATE, RUSER, MUSER)
+		VALUES (SYSDATE(), #{state_0} , SYSDATE(), SYSDATE(), #{user}, #{user})
+	]]></insert>
+	
+	
+	<select id="selectLdapBatch" resultType="String">
+		SELECT COUNT(*)
+		FROM LDAP_BATCH_LOG
+		WHERE STATE = #{state_0}
+	</select>	
+	
+	<insert id="updateLdapDataList"><![CDATA[
+		UPDATE LDAP_BATCH_LOG
+		SET 
+			END_TIME = SYSDATE(), SEARCH_CNT = #{search_cnt}, STATE = #{state_s}, MDATE = SYSDATE(), MUSER = #{user}, ERR_DETAIl = #{err_detail} 
+		WHERE 
+			STATE= #{state_0}
+	]]></insert>		
+	
+	<insert id="insertOrgCode" ><![CDATA[
+        INSERT INTO ORG_INFO
+        		(OUCODE, OU, TOPOUCODE, PARENTOUCODE, REPOUCODE, UCORGFULLNAME, OULEVEL, OUORDER, UCCHIEFTITLE, OURECEIVEDOCUMENTYN, OUSENDOUTDOCUMENTYN)
+        values	]]>
+	        <foreach  item="item" collection="input" open="(" separator="),(" close=")"><![CDATA[
+	        	#{item.ouCode}, #{item.ou}, #{item.topOuCode}, #{item.parentOuCode}, #{item.repOucode}, #{item.ucOrgFullName}, #{item.ouLevel}, #{item.ouOrder}, #{item.ucChieftitle}, #{item.ouReceiveDocumentYN}, #{item.ouSendOutDocumentYN}
+	        ]]></foreach>
+ 	</insert>
+ 	
+ 	<insert id="insertOrgCode2" ><![CDATA[
+		INSERT INTO ORG_INFO	(
+			OUCODE, OU, TOPOUCODE, PARENTOUCODE, REPOUCODE, UCORGFULLNAME, OULEVEL, OUORDER, UCCHIEFTITLE, OURECEIVEDOCUMENTYN, OUSENDOUTDOCUMENTYN, REGDATE, STATE, NOTESYN, RDATE, MDATE, RUSER, MUSER
+		) VALUES (
+			#{ouCode}, #{ou}, #{topOuCode}, #{parentOuCode}, #{repOucode}, #{ucOrgFullName}, #{ouLevel}, #{ouOrder}, #{ucChieftitle}, #{ouReceiveDocumentYN}, #{ouSendOutDocumentYN}, #{regdate}, #{state_i}, #{notesYN}, sysdate(), sysdate(), #{user}, #{user}
+		) ON DUPLICATE KEY UPDATE
+			OU = #{ou}, TOPOUCODE = #{topOuCode}, PARENTOUCODE = #{parentOuCode}, REPOUCODE= #{repOucode}, UCORGFULLNAME= #{ucOrgFullName}, OULEVEL = #{ouLevel}, OUORDER = #{ouOrder}, UCCHIEFTITLE= #{ucChieftitle}, OURECEIVEDOCUMENTYN = #{ouReceiveDocumentYN}, ouSendOutDocumentYN = #{ouSendOutDocumentYN}, REGDATE = #{regdate}, NOTESYN = #{notesYN}, MDATE =  sysdate(), MUSER= #{user}
+			, STATE= 
+				(SELECT 
+					CASE WHEN (A.LDAPINFO != #{ldapInfo}) THEN #{state_u}
+						WHEN (A.STATE = #{state_d} and A.LDAPINFO = #{ldapInfo}) THEN #{state_i}
+						WHEN (A.LDAPINFO = #{ldapInfo}) THEN #{state_0} END 'STATE'
+				FROM (
+					SELECT CONCAT(OUCODE, '|', OU, '|', TOPOUCODE, '|', PARENTOUCODE, '|' , UCORGFULLNAME, '|', OULEVEL, '|', OUORDER, '|', UCCHIEFTITLE, '|', OURECEIVEDOCUMENTYN, '|', OUSENDOUTDOCUMENTYN) AS LDAPINFO,
+							STATE
+					FROM ORG_INFO
+					WHERE  OUCODE = #{ouCode})A
+				)
+		
+	]]></insert>
+	
+	<insert id="insertExceptionFilter" ><![CDATA[
+		INSERT INTO LDAP_SEARCH_FAIL(
+			FILTER, STATE, REGDATE, RDATE, MDATE, RUSER, MUSER, RETRY
+		) VALUES (
+			#{filter}, #{state_0}, #{regdate}, sysdate(), sysdate(), #{user}, #{user}, #{retry}
+		)
+	]]></insert>
+	
+	<update id="updateDelCodeList"><![CDATA[
+		UPDATE  ORG_INFO
+		SET STATE = #{state_d}, NOTESYN = #{notes_yn_n}, MDATE = SYSDATE(), MUSER = #{user}
+		WHERE REGDATE = #{yesterday} AND NOTESYN = #{notes_yn_n}
+	]]></update>
+	
+	<update id="updateNotesDocument"><![CDATA[
+		UPDATE  ORG_INFO
+		SET STATE = #{state}, NOTESYN = #{notesyn}, MDATE = SYSDATE(), MUSER = #{user}
+		WHERE OUCODE = #{oucode}
+	]]></update>
+	
+	
+	<select id="selectOrgStateInfo" resultType="java.util.HashMap"><![CDATA[
+		SELECT 
+			 OUCODE, OU, TOPOUCODE, PARENTOUCODE, REPOUCODE, UCORGFULLNAME, OULEVEL, OUORDER, UCCHIEFTITLE, OURECEIVEDOCUMENTYN, OUSENDOUTDOCUMENTYN 
+		FROM ORG_INFO
+		WHERE 
+			STATE = #{state}
+			AND REGDATE = #{regdate}
+			AND NOTESYN = #{notes_yn_n}
+	]]></select>
+		
+	
+	<!-- 문서 유통  -->
+	<select id="selectSeq" resultType="int"><![CDATA[
+		SELECT IFNULL(MAX(SEQ)+1, 0) AS SEQ 
+		FROM DOC_DSTRB_LOG
+		WHERE 
+			RDATE BETWEEN STR_TO_DATE(#{s_date},'%Y%m%d%H%i%s') AND STR_TO_DATE(#{e_date},'%Y%m%d%H%i%s')
+	]]></select>
+	
+	<select id="selectReceiveDoc" resultType="int">
+		SELECT COUNT(*) 
+		FROM DOC_DSTRB_LOG
+		WHERE 
+			FILE_ID=#{file_id}
+			AND STATE = #{state_0}
+	</select>
+	
+	<insert id="insertReceiveDoc" ><![CDATA[
+		INSERT INTO DOC_DSTRB_LOG
+			(SEQ, FILE_ID, STATE, RDATE, RUSER, MDATE, MUSER, ERR_CNT)
+		VALUES (#{seq}, #{file_id}, #{state_0}, sysdate(), #{user}, sysdate(), #{user}, #{err_cnt})
+	]]></insert>
+	
+	<select id="selectReceiveDocList" resultType="java.util.HashMap"><![CDATA[
+		SELECT
+			FILE_ID, SEQ, ERR_CNT
+		FROM DOC_DSTRB_LOG
+		WHERE STATE=#{state_0}
+	]]></select>
+	
+	
+	<update id="updateReceiveDocList"><![CDATA[
+		UPDATE DOC_DSTRB_LOG
+		SET 
+			DOC_ID = #{doc_id}, DOC_TYPE = #{doc_type}, SEND_ID = #{send_id}, SEND_NAME = #{send_name}, TITLE = #{title}, STATE= #{state_1}, MDATE = SYSDATE(), MUSER = #{user}
+		WHERE 
+			STATE = #{state_0} AND FILE_ID = #{file_id} AND SEQ = #{seq} 
+	]]></update>
+	
+	
+	<update id="updateReceiveRst"><![CDATA[
+		UPDATE DOC_DSTRB_LOG
+		SET 
+			STATE= #{state_rst}, ERR_CODE = #{err_code}, MDATE = SYSDATE(), MUSER = #{user}
+		WHERE 
+			STATE = #{state_1} AND FILE_ID = #{file_id} AND SEQ = #{seq}
+	]]></update>
+	
+	<insert id="insertSendDoc" ><![CDATA[
+		INSERT INTO DOC_DSTRB_LOG(
+			SEQ, FILE_ID, DOC_ID, DOC_TYPE, STATE, TITLE, SEND_ID, SEND_NAME, RDATE, RUSER, MDATE, MUSER)
+		VALUES (
+			#{seq}, #{file_id}, #{doc_id}, #{doc_type}, #{state}, #{title}, #{send_id}, #{send_name}, sysdate(), #{user}, sysdate(), #{user})		
+	]]></insert>
+	
+	<select id="selectOrgList" resultType="java.util.HashMap"><![CDATA[
+		SELECT OUCODE, OU,  PARENTOUCODE, REPOUCODE, UCORGFULLNAME, UCCHIEFTITLE,  OUSENDOUTDOCUMENTYN
+			FROM ORG_INFO 
+		WHERE UCCHIEFTITLE IS NOT NULL 
+			AND UCCHIEFTITLE != #{ucchieftitle} 
+			AND UCCHIEFTITLE NOT LIKE #{likeUcchieftitle}
+	]]></select>
+	
+	<select id="selectOrg" resultType="java.util.HashMap"><![CDATA[
+		SELECT OUCODE, OU,  PARENTOUCODE, REPOUCODE, UCORGFULLNAME, UCCHIEFTITLE,  OUSENDOUTDOCUMENTYN
+			FROM ORG_INFO
+		WHERE OUCODE = #{oucode}
+	]]></select>
+ 	
+ 	<update id="updateUcChieftitle"><![CDATA[
+		UPDATE ORG_INFO
+		SET 
+			UCCHIEFTITLE = #{ucchieftitle}
+		WHERE 
+			OUCODE = #{oucode}
+	]]></update>
+	
+	<select id="selectResDocErrCnt" resultType="int">
+		SELECT ERR_CNT
+		FROM DOC_DSTRB_LOG
+		WHERE 
+			FILE_ID=#{file_id}
+			AND STATE = #{state_1}
+			AND SEQ = #{seq}
+	</select>
+	
+	<update id="updateDocErrCnt"><![CDATA[
+		UPDATE DOC_DSTRB_LOG
+		SET 
+			ERR_CNT = #{err_cnt}, STATE = #{state_0}
+		WHERE 
+			FILE_ID=#{file_id}
+			AND SEQ = #{seq}
+	]]></update>
+</mapper>
