@@ -1,11 +1,30 @@
 # java110-project
 
+## 3.1
+
+ - 웹서버를 중계 서버로 사용하기
+ - 서블릿 컨테이너 적용
+
+## 3.0
+
+ - 웹 브라우저를 클라이언트로 사용하기
+ - 서버에 HTTP 프로토콜을 처리하는 기능 추가
+## 2.9
+ - Command pattern으로 분할된 매서드를 한클래스로 합치기
+ - 관련된 컨트롤러 클래스르 한 클래스로 만든다.
+    - ManagerListController, ManagerAddController, ManagerDetailController, ManagerDeleteController 클래스를
+      ManagerController 클래스로 합친다.
+    - 학생 관리와 관리도 마찬가지이다.
+    - 각각의 컨트롤러가 크지 않을 떄는 관리하기 쉽게 한 클래스로 합치기도 한다.
 
 
 ## 2.8
+
 - Multi Thread 적용하기(Connection-Oriented에서 stateless 방식으로 요청 처리)
 
+
 ## 2.7
+
 - Multi Thread 적용하기(Connection-Oriented에서 stateful 방식으로 요청 처리)
 - 별도의 Thread를 만들어 Client의 요청을 처리 하게 한다.
 - 즉 동시에 여러 클라이언트의 요청을 처리한다.
