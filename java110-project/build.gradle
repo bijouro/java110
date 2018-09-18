@@ -1,10 +1,9 @@
 plugins {
     id 'java'
-    id 'application'
-    id 'eclipse'
+    id 'eclipse-wtp'
+    id 'war'
 }
 
-mainClassName = 'bitcamp.java110.cms.App'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -15,7 +14,9 @@ tasks.withType(JavaCompile) {
 // 프로젝트에서 사용할 라이브러리 등록
 // 라이브러리 정보는 mvnrepository.com 에서 검색하여 가져온다
 dependencies {
-
+    // Servlet API 라이브러리
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+    
     // Spring IoC 컨테이너 관련 라이브러리 
     compile group: 'org.springframework', name: 'spring-context', version: '5.0.9.RELEASE'
 

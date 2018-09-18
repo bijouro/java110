@@ -3,6 +3,9 @@ package bitcamp.java110.cms.control;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +26,8 @@ public class StudentController {
     }
 
     @RequestMapping("student/add")
-    public void add(Request request, Response response) {
+    public void add(ServletRequest request, ServletResponse response) 
+            throws Exception{
             Student s = new Student();
             
             
@@ -39,7 +43,8 @@ public class StudentController {
             out.println("등록하였습니다.");
     }
     @RequestMapping("student/delete")
-    public void delete(Request request, Response response) {
+    public void delete(ServletRequest request, ServletResponse response) 
+            throws Exception{
         
         int no = Integer.parseInt(request.getParameter("no"));
         PrintWriter out = response.getWriter();
@@ -52,7 +57,8 @@ public class StudentController {
     }
     
     @RequestMapping("student/detail")
-    public void detail(Request request, Response response) {
+    public void detail(ServletRequest request, ServletResponse response) 
+            throws Exception{
         
         int no = Integer.parseInt(request.getParameter("no"));
         PrintWriter out = response.getWriter();
@@ -73,7 +79,8 @@ public class StudentController {
     }
     
     @RequestMapping("student/list")
-    public void list(Request request, Response response) {
+    public void list(ServletRequest request, ServletResponse response) 
+            throws Exception{
         List<Student> list = studentDao.findAll();
         PrintWriter out = response.getWriter();
         for (Student s : list) {
