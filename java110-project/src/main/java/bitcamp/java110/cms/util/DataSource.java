@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 
 import org.springframework.stereotype.Component;
 
-@Component
 public class DataSource {
 
     Connection con;

@@ -6,21 +6,14 @@ import java.util.List;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import bitcamp.java110.cms.annotation.RequestMapping;
 import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.domain.Manager;
-import bitcamp.java110.cms.server.Request;
-import bitcamp.java110.cms.server.Response;
 
-@Component
 public class ManagerController { 
 
     ManagerDao managerDao;
 
-    @Autowired
     public void setManagerDao(ManagerDao managerDao) {
         this.managerDao = managerDao;
     }

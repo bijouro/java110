@@ -14,12 +14,10 @@ import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.domain.Manager;
 import bitcamp.java110.cms.util.DataSource;
 
-@Component
 public class ManagerMysqlDao implements ManagerDao {
 
     DataSource dataSource;
 
-    @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
