@@ -19,18 +19,14 @@ import bitcamp.java110.cms.util.DataSource;
 public class TeacherListServlet extends HttpServlet { 
     
     private static final long serialVersionUID = 1L;
-    TeacherMysqlDao teacherDao;
-    
-    @Override
-    public void init() throws ServletException {
-        DataSource dataSource = new DataSource();
-        teacherDao = new TeacherMysqlDao();
-        teacherDao.setDataSource(dataSource);
-    }
-    
     
     public void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException{
+        
+        TeacherDao teacherDao = (TeacherDao)this.getServletContext()
+                .getAttribute("teacherDao");
+        
+        
         List<Teacher> list = teacherDao.findAll();
         response.setContentType("text/plain;charset=UTF-8");
         PrintWriter out = response.getWriter();
