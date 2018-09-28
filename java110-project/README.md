@@ -1,6 +1,12 @@
 # java110-project
 
 ## 4.2
+ - HTML 출력하기
+ - 작업
+      - 서블릿의 출력 콘텐트를 일반 텍스트에서 HTML로 바꾼다.
+
+      
+## 4.2
  - 리스너를 이용하여 공용 자원을 준비하기
  - 작업
      - ContextLoaderListener 클래스 생성
