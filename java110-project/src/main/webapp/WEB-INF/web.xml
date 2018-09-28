@@ -41,11 +41,11 @@
          loadOnStartup 배치 속성을 추가한다.
     
     -->
-    <servlet>
-      <servlet-name>InitServlet</servlet-name>
-      <servlet-class>bitcamp.java110.cms.servlet.InitServlet</servlet-class>
-      <load-on-startup>1</load-on-startup>
-    </servlet>
+  
+    <!-- 리스너 배치하기 -->
+    <listener>
+        <listener-class>bitcamp.java110.cms.listener.ContextLoaderListener</listener-class>
+    </listener>
     
     <!-- 클라이언트가 요청한 URL에 대해 정적 파일을 찾을 때 우선 순위  -->
     <welcome-file-list>
