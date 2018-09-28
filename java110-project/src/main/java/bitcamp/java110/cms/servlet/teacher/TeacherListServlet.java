@@ -52,7 +52,7 @@ public class TeacherListServlet extends HttpServlet {
         out.println("<table>");
         out.println("<thead>");
         out.println("   <tr>");
-        out.println("       <th>번호</th><th>이름</th><th>이메일</th><th>최종학력</th><th>재직여부</th>");
+        out.println("       <th>번호</th><th>이름</th><th>이메일</th><th>시급</th><th>강의과목</th>");
         out.println("   </tr>");
         out.println("</thead>");
         out.println("<tbody>");

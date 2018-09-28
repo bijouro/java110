@@ -19,11 +19,8 @@ public class ManagerAddServlet extends HttpServlet {
     
     public void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException{
-        
-        //POST 방식으로 들어온 한글데이터는 다음 매서드를 호출하여 어떤 인코딩인지 알려줘야 한다.
-        // getParameter() 호출할 때 정상적으로 디코딩 할 것이다.
-        request.setCharacterEncoding("UTF-8");        
         Manager m = new Manager();
+        request.setCharacterEncoding("UTF-8");        
         
         m.setName(request.getParameter("name"));
         m.setEmail(request.getParameter("email"));
@@ -31,29 +28,37 @@ public class ManagerAddServlet extends HttpServlet {
         m.setTel(request.getParameter("tel"));
         m.setPosition(request.getParameter("position"));
         
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        // 등록 결과를 출력하고 1초가 경과한 후에 목록 페이지를 요청하도록 
+        // refresh 명령을 설정한다.
+        //   - 응답헤더로 웹 브라우저에게 알린다.
+        
         ManagerDao managerDao = (ManagerDao)this.getServletContext()
                 .getAttribute("managerDao");
         
-        out.println("<!DOCTYPE html>");
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<meta charset='UTF-8'>");
-        out.println("<title>매니저 관리</title>");
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<h1>매니저 등록 결과</h1>");
         
         try {
             managerDao.insert(m);
-            out.println("<p>등록하였습니다.</p>");     
+            // 오류 없이 등록에 성공 했으면 목록 페이지를 다시 요청한다.
+            response.sendRedirect("list");
         }catch(Exception e) {
             e.printStackTrace();
-            out.println("<p>등록중 오류발생</p>");
+            response.setHeader("Refresh", "1;url=list");
+            
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<meta charset='UTF-8'>");
+            out.println("<title>매니저 관리</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>매니저 등록 결과</h1>");
+            out.printf("<p>잠시 기다리시면 목록 페이지로 자동 이동합니다.</p>\n");
+            out.println("</body>");
+            out.println("</html>");
         }
-        out.println("</body>");
-        out.println("</html>");
     }
 
 }

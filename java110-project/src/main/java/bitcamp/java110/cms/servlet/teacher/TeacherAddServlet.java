@@ -31,31 +31,35 @@ public class TeacherAddServlet extends HttpServlet {
             t.setTel(request.getParameter("tel"));
             t.setPay(Integer.parseInt(request.getParameter("pay")));
             t.setSubjects(request.getParameter("subject"));
-            response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
             
             TeacherDao teacherDao = (TeacherDao)this.getServletContext()
                     .getAttribute("teacherDao");
             
             
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<meta charset='UTF-8'>");
-            out.println("<title>강사 관리</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>강사 등록 결과</h1>");
-            
             try {
                 teacherDao.insert(t);
-                out.println("<p>등록하였습니다.</p>");     
+                response.sendRedirect("list");
+                
             }catch(Exception e) {
                 e.printStackTrace();
-                out.println("<p>등록중 오류발생</p>");
+                response.setHeader("Refresh", "1;url=list");
+                
+                response.setContentType("text/html;charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                
+                e.printStackTrace();
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<meta charset='UTF-8'>");
+                out.println("<title>강사 관리</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>강사 등록 실패</h1>");
+                out.printf("<p>잠시 기다리시면 목록 페이지로 자동 이동합니다.</p>\n");
+                out.println("</body>");
+                out.println("</html>");
             }
-            out.println("</body>");
-            out.println("</html>");
     }
     
 }
