@@ -40,24 +40,10 @@ public class StudentAddServlet extends HttpServlet {
                 response.sendRedirect("list");
                 
             }catch(Exception e) {
-                e.printStackTrace();
-                response.setHeader("Refresh", "1;url=list");
-                
-                response.setContentType("text/html;charset=UTF-8");
-                PrintWriter out = response.getWriter();
-                
-                e.printStackTrace();
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<meta charset='UTF-8'>");
-                out.println("<title>학생 관리</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>학생 등록 실패</h1>");
-                out.printf("<p>잠시 기다리시면 목록 페이지로 자동 이동합니다.</p>\n");
-                out.println("</body>");
-                out.println("</html>");
+                request.setAttribute("error", e);
+                request.setAttribute("message", "학생 등록 오류!");
+                request.setAttribute("refresh", "3;url=list");
+                request.getRequestDispatcher("/error").forward(request, response);
             }
     }
     
