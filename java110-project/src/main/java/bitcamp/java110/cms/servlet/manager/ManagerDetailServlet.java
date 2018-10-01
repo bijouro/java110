@@ -3,6 +3,7 @@ package bitcamp.java110.cms.servlet.manager;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +38,7 @@ public class ManagerDetailServlet extends HttpServlet {
         out.println("<head>");
         out.println("<meta charset='UTF-8'>");
         out.println("<title>매니저 관리</title>");
-
+        out.println("<link rel='stylesheet' href='../css/common.css'>");
         out.println("<style>");
         out.println("table, th, td {");
         out.println(" border: 1px solid gray;");
@@ -46,10 +47,12 @@ public class ManagerDetailServlet extends HttpServlet {
 
         out.println("</head>");
         out.println("<body>");
+        
+        RequestDispatcher rd = request.getRequestDispatcher("/header");
+        rd.include(request, response);
+        
+        
         out.println("<h1>매니저 상세정보</h1>");
-
-
-
 
         if (m == null) {
             out.println("<p>해당 번호의 매니저가 없습니다!</p>");
@@ -66,7 +69,6 @@ public class ManagerDetailServlet extends HttpServlet {
 
         }
 
-
         out.println("</tbody>");
         out.println("</table>");
 
@@ -77,6 +79,8 @@ public class ManagerDetailServlet extends HttpServlet {
         out.printf("   location.href='delete?no=%d'\n",m.getNo());
         out.println("}");
         out.println("</script>");
+        rd = request.getRequestDispatcher("/footer");
+        rd.include(request, response);
         out.println("</body>");
         out.println("</html>");
     }

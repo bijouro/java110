@@ -5,7 +5,7 @@
  *  그래서 작업을 위임 받은 서블릿에서 새로 출력한다.
  *  
  */
-package ex09;
+package bitcamp.java110.ex09;
 
 import java.io.IOException;
 import java.io.PrintWriter;
