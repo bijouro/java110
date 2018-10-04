@@ -41,25 +41,3 @@ public class ManagerDeleteServlet extends HttpServlet {
     }
     
 }
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
-    
-    
-    
-    
