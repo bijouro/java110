@@ -31,7 +31,7 @@ public class ManagerController {
         
         managerDao.insert(m);
         PrintWriter out = response.getWriter();
-        out.println("ë“±ë¡í•˜ì˜€ìŠµë‹ˆë‹¤.");
+        out.println("?“±ë¡í•˜???Šµ?‹ˆ?‹¤.");
         
     }
 
@@ -44,9 +44,9 @@ public class ManagerController {
         PrintWriter out = response.getWriter();
         
         if (managerDao.delete(no) > 0) {
-            out.println("ì‚­ì œí•˜ì˜€ìŠµë‹ˆë‹¤.");
+            out.println("?‚­? œ?•˜???Šµ?‹ˆ?‹¤.");
         } else {
-            out.println("í•´ë‹¹ ë²ˆí˜¸ì˜ ë§¤ë‹ˆì €ê°€ ì—†ìŠµë‹ˆë‹¤!");
+            out.println("?•´?‹¹ ë²ˆí˜¸?˜ ë§¤ë‹ˆ??ê°? ?—†?Šµ?‹ˆ?‹¤!");
         }
     }
     
@@ -60,15 +60,15 @@ public class ManagerController {
         PrintWriter out = response.getWriter();
         
         if (m == null) {
-            System.out.println("í•´ë‹¹ ë²ˆí˜¸ì˜ ë§¤ë‹ˆì €ê°€ ì—†ìŠµë‹ˆë‹¤!");
+            System.out.println("?•´?‹¹ ë²ˆí˜¸?˜ ë§¤ë‹ˆ??ê°? ?—†?Šµ?‹ˆ?‹¤!");
             return;
         }
         
-        out.printf("ì´ë¦„: %s\n", m.getName());
-        out.printf("ì´ë©”ì¼: %s\n", m.getEmail());
-        out.printf("ì•”í˜¸: %s\n", m.getPassword());
+        out.printf("?´ë¦?: %s\n", m.getName());
+        out.printf("?´ë©”ì¼: %s\n", m.getEmail());
+        out.printf("?•”?˜¸: %s\n", m.getPassword());
         out.printf("ì§ìœ„: %s\n", m.getPosition());
-        out.printf("ì „í™”: %s\n", m.getTel());
+        out.printf("? „?™”: %s\n", m.getTel());
     }
     
     @RequestMapping("manager/list")

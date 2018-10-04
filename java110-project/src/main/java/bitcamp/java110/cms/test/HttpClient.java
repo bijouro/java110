@@ -13,7 +13,7 @@ public class HttpClient {
             Scanner in = new Scanner(socket.getInputStream());
 
              )   {
-            // HTTP ìš”ì²­
+            // HTTP ?š”ì²?
             // 1) Request-line ì¶œë ¥
             out.println("GET / HTTP/1.1");
 
@@ -27,7 +27,7 @@ public class HttpClient {
             // 3) End of Header
             out.println();
 
-            // 4) ì„œë²„ì— ë³´ë‚¼ ë°ì´í„° ( message-body) ìƒëµ ê°€ëŠ¥.
+            // 4) ?„œë²„ì— ë³´ë‚¼ ?°?´?„° ( message-body) ?ƒ?µ ê°??Š¥.
 
 
             while(true) {
