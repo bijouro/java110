@@ -1,7 +1,6 @@
 package bitcamp.java110.cms.servlet.student;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,38 +12,40 @@ import bitcamp.java110.cms.dao.StudentDao;
 import bitcamp.java110.cms.domain.Student;
 
 @WebServlet("/student/add")
-public class StudentAddServlet extends HttpServlet { 
-    
+public class StudentAddServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+  
+    @Override
+    protected void doPost(
+            HttpServletRequest request, 
+            HttpServletResponse response) 
+            throws ServletException, IOException {
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException{
+        request.setCharacterEncoding("UTF-8");
         
-            request.setCharacterEncoding("UTF-8");        
+        Student s = new Student();
+        s.setName(request.getParameter("name"));
+        s.setEmail(request.getParameter("email"));
+        s.setPassword(request.getParameter("password"));
+        s.setTel(request.getParameter("tel"));
+        s.setSchool(request.getParameter("school"));
+        s.setWorking(Boolean.parseBoolean(request.getParameter("working")));
         
-            Student s = new Student();
-
-            s.setName(request.getParameter("name"));      
-            s.setEmail(request.getParameter("email"));
-            s.setPassword(request.getParameter("password"));
-            s.setSchool(request.getParameter("school"));
-            s.setWorking(Boolean.parseBoolean(request.getParameter("working")));
-            s.setTel(request.getParameter("tel"));            
+        StudentDao studentDao = (StudentDao)this.getServletContext()
+                .getAttribute("studentDao");
+        
+        try {
+            studentDao.insert(s);
+            response.sendRedirect("list");
             
-            StudentDao studentDao = (StudentDao)this.getServletContext()
-                    .getAttribute("studentDao");
-              
+        } catch(Exception e) {
+            request.setAttribute("error", e);
+            request.setAttribute("message", "학생 등록 오류!");
+            request.setAttribute("refresh", "3;url=list");
             
-            try {
-                studentDao.insert(s);
-                response.sendRedirect("list");
-                
-            }catch(Exception e) {
-                request.setAttribute("error", e);
-                request.setAttribute("message", "학생 등록 오류!");
-                request.setAttribute("refresh", "3;url=list");
-                request.getRequestDispatcher("/error").forward(request, response);
-            }
+            request.getRequestDispatcher("/error").forward(request, response);
+        }
+        
     }
-    
+ 
 }

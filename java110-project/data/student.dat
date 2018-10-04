@@ -1,2 +1,4 @@
-a,A,a,a,000,true
-student1@mail.com,학생1,password,학력,010-1111-2222,true
+s1,s1,1111,s1,s1,true
+s2,s2,s2,s2,s2,false
+s3,s3,s3,s3,s3,true
+s4,s4,s4,s4,s4,false

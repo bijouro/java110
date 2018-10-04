@@ -11,6 +11,5 @@ public class Manager extends Member {
     public void setPosition(String position) {
         this.position = position;
     }
-
 }
 
