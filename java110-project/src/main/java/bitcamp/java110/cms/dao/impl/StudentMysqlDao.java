@@ -18,13 +18,12 @@ public class StudentMysqlDao implements StudentDao {
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    
-    public int insert(Student student)  throws DaoException{
+
+    public int insert(Student student) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         
         try {
-            
             con = dataSource.getConnection();
             
             con.setAutoCommit(false);
@@ -50,11 +49,12 @@ public class StudentMysqlDao implements StudentDao {
                     + "','" + (student.isWorking()?'Y':'N')
                     + "')";
             stmt.executeUpdate(sql2);
+            
             con.commit();
             return 1;
             
         } catch (Exception e) {
-            try{con.rollback();}catch(Exception e2) {}
+            try {con.rollback();} catch (Exception e2) {}
             throw new DaoException(e);
             
         } finally {
@@ -62,7 +62,7 @@ public class StudentMysqlDao implements StudentDao {
         }
     }
     
-    public List<Student> findAll()  throws DaoException{
+    public List<Student> findAll() throws DaoException {
         
         ArrayList<Student> list = new ArrayList<>();
         
@@ -99,7 +99,8 @@ public class StudentMysqlDao implements StudentDao {
             throw new DaoException(e);
         } finally {
             try {rs.close();} catch (Exception e) {}
-            try {stmt.close();} catch (Exception e) {}        }
+            try {stmt.close();} catch (Exception e) {}
+        }
         return list;
     }
     
@@ -211,36 +212,38 @@ public class StudentMysqlDao implements StudentDao {
             return 1;
             
         } catch (Exception e) {
-            try{con.rollback();}catch(Exception e2) {}
+            try {con.rollback();} catch (Exception e2) {}
             throw new DaoException(e);
             
         } finally {
             try {stmt.close();} catch (Exception e) {}
         }
     }
+    
     @Override
-    public Student  findByEmailPassword(String email, String password)  throws DaoException{
+    public Student findByEmailPassword(String email, String password) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
-
+        
         try {
             con = dataSource.getConnection();
+            
             stmt = con.createStatement();
             rs = stmt.executeQuery(
                     "select" + 
-                            " m.mno," +
-                            " m.name," + 
-                            " m.email," + 
-                            " m.tel," + 
-                            " s.schl," +
-                            " s.work" + 
-                            " from p1_stud s" + 
-                            " inner join p1_memb m on s.sno = m.mno" +
-                            " where m.email='" + email + "'" +
-                            "  and m.pwd = password('" + password + "')"                    
-                    );
-
+                    " m.mno," +
+                    " m.name," + 
+                    " m.email," + 
+                    " m.tel," + 
+                    " s.schl," +
+                    " s.work" + 
+                    " from p1_stud s" + 
+                    " inner join p1_memb m on s.sno = m.mno" +
+                    " where m.email='" + email + 
+                    "' and m.pwd=password('" + password +
+                    "')");
+            
             if (rs.next()) {
                 Student s = new Student();
                 s.setNo(rs.getInt("mno"));
@@ -249,21 +252,20 @@ public class StudentMysqlDao implements StudentDao {
                 s.setTel(rs.getString("tel"));
                 s.setSchool(rs.getString("schl"));
                 s.setWorking(rs.getString("work").equals("Y") ? true : false);
-
+                
+                
                 return s;
             }
             return null;
-
+            
         } catch (Exception e) {
             throw new DaoException(e);
-
+            
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
         }
     }
-    
-    
 }
 
 

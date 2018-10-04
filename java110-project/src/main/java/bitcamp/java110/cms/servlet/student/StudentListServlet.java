@@ -12,22 +12,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bitcamp.java110.cms.dao.StudentDao;
-import bitcamp.java110.cms.dao.impl.StudentMysqlDao;
 import bitcamp.java110.cms.domain.Student;
-import bitcamp.java110.cms.util.DataSource;
 
 @WebServlet("/student/list")
-public class StudentListServlet extends HttpServlet { 
-
+public class StudentListServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException{
-        StudentDao studentDao = (StudentDao)this.getServletContext()
-                .getAttribute("studentDao");
-        List<Student> list = studentDao.findAll();
+  
+    @Override
+    protected void doGet(
+            HttpServletRequest request, 
+            HttpServletResponse response) 
+            throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        
+        StudentDao studentDao = (StudentDao)this.getServletContext()
+                .getAttribute("studentDao");
+        
+        List<Student> list = studentDao.findAll();
         
         out.println("<!DOCTYPE html>");
         out.println("<html>");
@@ -37,10 +40,9 @@ public class StudentListServlet extends HttpServlet {
         out.println("<link rel='stylesheet' href='../css/common.css'>");
         out.println("<style>");
         out.println("table, th, td {");
-        out.println(" border: 1px solid gray;");
-        out.println("};");
+        out.println("    border: 1px solid gray;");
+        out.println("}");
         out.println("</style>");
-
         out.println("</head>");
         out.println("<body>");
         
@@ -50,30 +52,33 @@ public class StudentListServlet extends HttpServlet {
         out.println("<h1>학생 목록</h1>");
         
         out.println("<p><a href='form.html'>추가</a></p>");
-        
         out.println("<table>");
         out.println("<thead>");
-        out.println("   <tr>");
-        out.println("       <th>번호</th><th>이름</th><th>이메일</th><th>최종학력</th><th>재직여부</th>");
-        out.println("   </tr>");
+        out.println("<tr>");
+        out.println("    <th>번호</th><th>이름</th><th>이메일</th> "
+                + "<th>최종학교</th><th>재직여부</th>");
+        out.println("</tr>");
         out.println("</thead>");
         out.println("<tbody>");
         
         for (Student s : list) {
-            out.println("   <tr>");
-            out.printf("<td>%d</td>",s.getNo());
-            out.printf("<td><a href='detail?no=%d'>%s</a></td>", s.getNo(), s.getName());
-            out.printf("<td>%s</td>", s.getEmail());
-            out.printf("<td>%s</td>", s.getSchool());
-            out.printf("<td>%b</td>", s.isWorking());
-            out.println("   </tr>");
+            out.println("<tr>");
+            out.printf("    <td>%d</td>\n", s.getNo());
+            out.printf("    <td><a href='detail?no=%d'>%s</a></td>\n",
+                    s.getNo(),
+                    s.getName());
+            out.printf("    <td>%s</td>\n", s.getEmail());
+            out.printf("    <td>%s</td>\n", s.getSchool());
+            out.printf("    <td>%b</td>\n", s.isWorking());
+            out.println("</tr>");
         }
         out.println("</tbody>");
         out.println("</table>");
+        
         rd = request.getRequestDispatcher("/footer");
         rd.include(request, response);
+        
         out.println("</body>");
         out.println("</html>");
     }
-
 }
