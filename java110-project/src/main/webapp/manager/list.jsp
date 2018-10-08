@@ -1,10 +1,8 @@
-<%@page import="bitcamp.java110.cms.domain.Manager"%>
-<%@page import="java.util.List"%>
-<%@page import="bitcamp.java110.cms.dao.ManagerDao"%>
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,24 +28,14 @@ table, th, td {
 </tr>
 </thead>
 <tbody>
-<jsp:useBean
-scope="request"
-id="list"
-class="java.util.ArrayList"
-type="java.util.ArrayList<Manager>"
-/>
-
-<%
-for(Manager m : list){
-pageContext.setAttribute("manager",m);
-%>
+<c:forEach items="${list}" var="manager">
 <tr>
     <td>${manager.no}</td>
     <td><a href='detail?no=${manager.no}'>${manager.name}</a></td>
     <td>${manager.email}</td>
     <td>${manager.position }</td>
 </tr>
-<% } %>
+</c:forEach>
 </tbody>
 </table>
 
