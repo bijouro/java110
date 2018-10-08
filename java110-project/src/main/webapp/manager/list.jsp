@@ -30,38 +30,24 @@ table, th, td {
 </tr>
 </thead>
 <tbody>
-
-<jsp:useBean 
+<jsp:useBean
 scope="request"
 id="list"
 class="java.util.ArrayList"
-type="java.util.List<Manager>"
+type="java.util.ArrayList<Manager>"
 />
 
 <%
-//List<Manager> list = (List<Manager>)request.getAttribute("list");
-
-/* 
-위으 jsp:useBean은 다음 자바코드로 변환된다.
-java.util.List<Manager> list = (java.util.List<Manager>)request.getAttribute("list");
-if(list == null){
-    list = new java.util.ArrayList();
-    request.setAttribute("list",list);
-    
-} */
-
-for (Manager m : list) {
+for(Manager m : list){
+pageContext.setAttribute("manager",m);
 %>
 <tr>
-    <td><%=m.getNo()%></td>
-    <td><a href='detail?no=<%=m.getNo()%>'><%=m.getName()%></a></td>
-    <td><%=m.getEmail()%></td>
-    <td><%=m.getPosition()%></td>
+    <td>${manager.no}</td>
+    <td><a href='detail?no=${manager.no}'>${manager.name}</a></td>
+    <td>${manager.email}</td>
+    <td>${manager.position }</td>
 </tr>
-<%
-}
-%>
-
+<% } %>
 </tbody>
 </table>
 
