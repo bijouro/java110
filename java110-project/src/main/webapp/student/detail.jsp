@@ -17,60 +17,47 @@ table, th, td {
 <body>
  <jsp:include page="../header.jsp"></jsp:include>
  
-  <jsp:useBean 
-scope="request"
-id="student"
-class="bitcamp.java110.cms.domain.Student"
-/>
-
 
  <h1>학생 상세정보</h1>
- <%
-  if(student==null){
-  %> 
- <p>해당 학생의 학생가 없습니다!</p>
- <% }else{ %>
-
  <table>
   <tbody>
    <tr>
     <th>번호</th>
-    <td><%=student.getNo()%></td>
+    <td>${student.no}</td>
    </tr>
    <tr>
     <th>이름</th>
-    <td><%=student.getName()%></td>
+    <td>${student.name}</td>
    </tr>
    <tr>
     <th>이메일</th>
-    <td><%=student.getEmail()%></td>
+    <td>${student.email}</td>
    </tr>
    <tr>
     <th>암호</th>
-    <td><%=student.getPassword()%></td>
+    <td>${student.password}</td>
    </tr>
    <tr>
     <th>전화</th>
-    <td><%=student.getTel()%></td>
+    <td>${student.tel}</td>
    </tr>
    <tr>
     <th>최종학력</th>
-    <td><%=student.getSchool()%></td>
+    <td>${student.school}</td>
    </tr>
    <tr>
     <th>재직여부</th>
-    <td><%=student.isWorking()%></td>
+    <td>${student.working}</td>
    </tr>
   </tbody>
  </table>
  <button type='button' onclick='remove()'>삭제</button>
  <script>
         function remove() {
-            location.href = 'delete?no=<%=student.getNo()%>'
+            location.href = 'delete?no=${student.no}'
         }
     </script>
 
-<% } %>
 
  <jsp:include page="../footer.jsp" />
 </body>

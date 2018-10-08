@@ -1,6 +1,5 @@
 <%@page import="bitcamp.java110.cms.domain.Student"%>
 <%@page import="java.util.List"%>
-<%@page import="bitcamp.java110.cms.dao.StudentDao"%>
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
@@ -18,33 +17,36 @@ table, th, td {
 </style>
 </head>
 <body>
- 
+
 <jsp:include page="../header.jsp"></jsp:include>
- 
+
 <h1>학생 목록(MVC)</h1>
 <p><a href='add'>추가</a></p>
 <table>
 <thead>
 <tr>
-    <th>번호</th> <th>이름</th> <th>이메일</th> <th>최종학력</th><th>재직여부</th>
+    <th>번호</th><th>이름</th><th>이메일</th> <th>최종학교</th><th>재직여부</th>
 </tr>
 </thead>
 <tbody>
-<jsp:useBean 
+<jsp:useBean
 scope="request"
 id="list"
 class="java.util.ArrayList"
-type="java.util.List<Student>"
+type="java.util.ArrayList<Student>"
 />
+
+
 <%
 for (Student s : list) {
+    pageContext.setAttribute("s",s);
 %>
 <tr>
-    <td><%=s.getNo()%></td>
-    <td><a href='detail?no=<%=s.getNo()%>'><%=s.getName()%></a></td>
-    <td><%=s.getEmail()%></td>
-    <td><%=s.getSchool()%></td>
-    <td><%=s.isWorking()%></td>
+    <td>${s.no}</td>
+    <td><a href='detail?no=${s.no}'>${s.name}</a></td>
+    <td>${s.email}</td>
+    <td>${s.school}</td>
+    <td>${s.working}</td>
 </tr>
 <%
 }
@@ -57,3 +59,17 @@ for (Student s : list) {
 
 </body>
 </html>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
