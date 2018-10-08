@@ -1,4 +1,3 @@
-<%@page import="bitcamp.java110.cms.domain.Teacher"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
  pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 
