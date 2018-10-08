@@ -1,5 +1,4 @@
 <%@page import="bitcamp.java110.cms.domain.Student"%>
-<%@page import="bitcamp.java110.cms.domain.Manager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
  pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 
@@ -17,10 +16,17 @@ table, th, td {
 </head>
 <body>
  <jsp:include page="../header.jsp"></jsp:include>
+ 
+  <jsp:useBean 
+scope="request"
+id="student"
+class="bitcamp.java110.cms.domain.Student"
+/>
+
+
  <h1>학생 상세정보</h1>
  <%
-  Student s = (Student)request.getAttribute("student");
-  if(s==null){
+  if(student==null){
   %> 
  <p>해당 학생의 학생가 없습니다!</p>
  <% }else{ %>
@@ -29,38 +35,38 @@ table, th, td {
   <tbody>
    <tr>
     <th>번호</th>
-    <td><%=s.getNo()%></td>
+    <td><%=student.getNo()%></td>
    </tr>
    <tr>
     <th>이름</th>
-    <td><%=s.getName()%></td>
+    <td><%=student.getName()%></td>
    </tr>
    <tr>
     <th>이메일</th>
-    <td><%=s.getEmail()%></td>
+    <td><%=student.getEmail()%></td>
    </tr>
    <tr>
     <th>암호</th>
-    <td><%=s.getPassword()%></td>
+    <td><%=student.getPassword()%></td>
    </tr>
    <tr>
     <th>전화</th>
-    <td><%=s.getTel()%></td>
+    <td><%=student.getTel()%></td>
    </tr>
    <tr>
     <th>최종학력</th>
-    <td><%=s.getSchool()%></td>
+    <td><%=student.getSchool()%></td>
    </tr>
    <tr>
     <th>재직여부</th>
-    <td><%=s.isWorking()%></td>
+    <td><%=student.isWorking()%></td>
    </tr>
   </tbody>
  </table>
  <button type='button' onclick='remove()'>삭제</button>
  <script>
         function remove() {
-            location.href = 'delete?no=<%=s.getNo()%>'
+            location.href = 'delete?no=<%=student.getNo()%>'
         }
     </script>
 

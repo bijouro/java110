@@ -1,5 +1,10 @@
 # java110-project
 
+## v5.0
+ 
+- JSP 액션 태그 적용
+- 작업
+    - list.jsp, detail.jsp에 JSP 액션 태그를 적용한다.
 
 
 ## v4.9
