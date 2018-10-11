@@ -2,7 +2,7 @@
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +18,7 @@ table, th, td {
 <body>
 
 <jsp:include page="../header.jsp"></jsp:include>
- 
+
 <h1>매니저 목록(MVC)</h1>
 <p><a href='add'>추가</a></p>
 <table>
@@ -28,14 +28,16 @@ table, th, td {
 </tr>
 </thead>
 <tbody>
-<c:forEach items="${list}" var="manager">
+
+<c:forEach  items="${list}" var="m">
 <tr>
-    <td>${manager.no}</td>
-    <td><a href='detail?no=${manager.no}'>${manager.name}</a></td>
-    <td>${manager.email}</td>
-    <td>${manager.position }</td>
+    <td>${m.no}</td>
+    <td><a href='detail?no=${m.no}'>${m.name}</a></td>
+    <td>${m.email}</td>
+    <td>${m.position}</td>
 </tr>
 </c:forEach>
+
 </tbody>
 </table>
 
@@ -43,3 +45,20 @@ table, th, td {
 
 </body>
 </html>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

@@ -19,3 +19,4 @@ public class Teacher extends Member {
         this.subjects = subjects;
     }
 }
+ 

@@ -12,19 +12,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet("/ex11/servlet14")
-public class Servlet14 extends HttpServlet{
-
+public class Servlet14 extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(
+            HttpServletRequest request, 
+            HttpServletResponse response) 
+                    throws ServletException, IOException {
         
         request.setCharacterEncoding("UTF-8");
         String tel = request.getParameter("tel");
-
-        // 클라이언트가 보낸 데이터를 세션에 보관한다.
+        
+        // 세션에 보관된 name과 age 값을 꺼낸다.
         HttpSession session = request.getSession();
-        session.setAttribute("tel", tel);
+        String name = (String)session.getAttribute("name");
+        String age = (String)session.getAttribute("age");
         
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -37,11 +40,23 @@ public class Servlet14 extends HttpServlet{
         out.println("</head>");
         out.println("<body>");
         out.println("<h1>최종 페이지</h1>");
-        out.printf("이름 : %s<br>\n",session.getAttribute("name"));
-        out.printf("나이 : %s<br>\n",session.getAttribute("age"));
-        out.printf("전화 : %s<br>\n",session.getAttribute("tel"));
+        out.printf("<p>이름: %s</p>\n", name);
+        out.printf("<p>나이: %s</p>\n", age);
+        out.printf("<p>전화: %s</p>\n", tel);
         out.println("</body>");
         out.println("</html>");
     }
-    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

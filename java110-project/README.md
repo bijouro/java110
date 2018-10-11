@@ -1,28 +1,62 @@
 # java110-project
 
+## v5.5
+
+- 트랜잭션 관리하기
+- 작업
+    - 트랜잭션을 위해 DataSource의 Connection을 관리하는 클래스를 작성한다.
+    - DataSource에 트랜잭션을 사용할 때와 아닐 때를 다룬다.
+    - 서브시 객체에 트랜잭션 관리자를 적용한다.
+
+
+## v5.4
+
+- Service 컴포넌트 적용
+    - Servlet이나 DAO에 있는 업무 로직을 별도의 클래스로 분리한다.
+    - 고객사 마다 업무 로직을 달리할 수 있도록 구조를 변경한다.
+- 작업
+    - 업무 로직에 대한 규칙을 인터페이스로 정의한다.
+    - 서비스 컴포넌트의 규칙을 준수하는 클래스를 작성한다.
+
+## v5.3
+
+- 파일 업로드 적용
+- 작업
+    - DB 테이블에 사진 파일명을 저장할 컬럼을 추가한다.
+    - DAO 변경
+    - 서블릿 변경
+    - 입력폼 변경
+
+## v5.2
+
+- JSTL 적용
+- 작업
+    - JSP 파일에 JSTL 태그를 적용한다.
 
 ## v5.1
 
- - EL 적용
- - 작업
+- EL 적용
+- 작업
     - JSP 파일에 EL 문법을 적용한다.
 
-
 ## v5.0
- 
+
 - JSP 액션 태그 적용
 - 작업
-    - list.jsp, detail.jsp에 JSP 액션 태그를 적용한다.
-
+    - JSP 파일에 JSP 액션 태그를 적용한다.
 
 ## v4.9
 
 - JSP를 활용한 MVC 모델 1 타입 적용
-- 작업
+- Servlet + JSP를 활용한 MVC 모델 2 타입 적용
+- MVC type 1 작업
     - /webapp/mvc1/manager/list.jsp 생성
     - /webapp/mvc1/header.jsp 생성
     - /webapp/mvc1/footer.jsp 생성
-
+- MVC type 2 작업
+    - /webapp/manager/list.jsp 생성
+    - ManagerListServlet 변경
+       
 ## v4.8
 
 - 필터를 이용하여 사용 권한 제어하기

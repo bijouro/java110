@@ -10,13 +10,14 @@ public class Member implements Serializable {
     protected String email;
     protected String password;
     protected String tel;
+    protected String photo;
     
     public int getNo() {
         return no;
     }
     public void setNo(int no) {
         this.no = no;
-    }
+    } 
     public String getName() {
         return name;
     }
@@ -37,8 +38,15 @@ public class Member implements Serializable {
     }
     public String getTel() {
         return tel;
-    }
+    } 
     public void setTel(String tel) {
         this.tel = tel;
     }
+    public String getPhoto() {
+        return photo;
+    }
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+    
 }

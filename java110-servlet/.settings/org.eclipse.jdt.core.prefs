@@ -1,8 +1,12 @@
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 #Thu Oct 04 09:48:51 KST 2018
 =======
 #Mon Oct 08 14:50:27 KST 2018
+=======
+#Thu Oct 11 09:58:05 KST 2018
+>>>>>>> b1
 org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
 >>>>>>> b1
 org.eclipse.jdt.core.compiler.problem.assertIdentifier=error

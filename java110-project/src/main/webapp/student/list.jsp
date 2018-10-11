@@ -2,7 +2,7 @@
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +28,7 @@ table, th, td {
 </tr>
 </thead>
 <tbody>
-<c:forEach items="${list}" var="s">
+<c:forEach  items="${list}" var="s">
 <tr>
     <td>${s.no}</td>
     <td><a href='detail?no=${s.no}'>${s.name}</a></td>
@@ -37,6 +37,7 @@ table, th, td {
     <td>${s.working}</td>
 </tr>
 </c:forEach>
+
 </tbody>
 </table>
 

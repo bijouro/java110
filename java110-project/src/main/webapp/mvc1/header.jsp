@@ -8,7 +8,7 @@
 <header>
     <h1>비트캠프</h1>
     <ul>
-<% 
+<%
 Member loginUser = (Member)session.getAttribute("loginUser");
 if (loginUser == null) {
 %>

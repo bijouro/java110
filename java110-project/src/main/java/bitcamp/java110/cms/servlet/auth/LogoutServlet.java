@@ -23,7 +23,7 @@ public class LogoutServlet extends HttpServlet {
         
         // 현재 세션 객체를 무효화시킨다.
         session.invalidate();
-        
+         
         response.sendRedirect("login");
     }
 }
