@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bitcamp.java110.cms.dao.StudentDao;
 import bitcamp.java110.cms.domain.Student;
+import bitcamp.java110.cms.service.StudentService;
 
 @WebServlet("/student/list")
 public class StudentListServlet extends HttpServlet {
@@ -23,18 +23,17 @@ public class StudentListServlet extends HttpServlet {
             HttpServletResponse response) 
             throws ServletException, IOException {
         
-        StudentDao studentDao = (StudentDao)this.getServletContext()
-                .getAttribute("studentDao");
-        List<Student> list = studentDao.findAll();
-
-        // JSP가 사용할 수 있도록 ServletRequest 보관소에 저장한다.
+        StudentService studentService = (StudentService)this.getServletContext()
+                .getAttribute("studentService");
+         
+        List<Student> list = studentService.list();
         request.setAttribute("list", list);
         
         response.setContentType("text/html;charset=UTF-8");
-        // JSP로 실행을 위임한다.
-        RequestDispatcher rd = request.getRequestDispatcher("/student/list.jsp");
-        rd.include(request, response);
         
+        RequestDispatcher rd = request.getRequestDispatcher(
+                "/student/list.jsp");
+        rd.include(request, response);
         
     }
 }

@@ -4,4 +4,4 @@
     trimDirectiveWhitespaces="true"%>
 <footer>
     <p>&copy;자바110기</p>
-</footer> 
+</footer>

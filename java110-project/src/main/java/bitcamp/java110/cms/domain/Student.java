@@ -11,7 +11,7 @@ public class Student extends Member {
     }
     public void setSchool(String school) {
         this.school = school;
-    }
+    } 
     public boolean isWorking() {
         return working;
     }

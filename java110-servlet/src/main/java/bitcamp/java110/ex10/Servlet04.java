@@ -1,5 +1,4 @@
-/* 
- * 쿠키(cookie) - 같은 경로의 서블릿이 쿠키를 받는 예
+/* 쿠키(cookie) - 같은 경로의 서블릿이 쿠키를 받는 예 
  */
 package bitcamp.java110.ex10;
 
@@ -14,12 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/ex1xx/servlet04")
-public class Servlet04 extends HttpServlet{
-
+public class Servlet04 extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    
     @Override
-    public void doGet( HttpServletRequest req, HttpServletResponse res) 
+    public void doGet(
+            HttpServletRequest req, 
+            HttpServletResponse res) 
             throws ServletException, IOException {
 
         Cookie[] cookies = req.getCookies();
@@ -34,12 +35,12 @@ public class Servlet04 extends HttpServlet{
         out.println("<title>ex10</title>");
         out.println("</head>");
         out.println("<body>");
-        out.println("<h1>쿠키 받기3 </h1>");
+        out.println("<h1>쿠키 받기3</h1>");
         
-
-        if(cookies != null) {
-            for(Cookie cookie:cookies) {
-                out.printf("<p>%s=%s<p>\n", 
+        // 경로가 다르면 웹브라우저는 서버에 쿠키를 보내지 않는다.
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                out.printf("<p>%s=%s</p>\n", 
                         cookie.getName(), 
                         cookie.getValue());
             }
@@ -49,4 +50,35 @@ public class Servlet04 extends HttpServlet{
         out.println("</html>");
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

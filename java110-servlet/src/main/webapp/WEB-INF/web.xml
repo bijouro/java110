@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
@@ -7,36 +8,30 @@
   metadata-complete="false">
 
     <description>
-            웹 애플리케이션에 대한 간단한 설명
+      웹 애플리케이션에 대한 간단한 설명을 기술한다.
     </description>
     <display-name>서버 관리페이지에 출력될 웹 애플리케이션 이름</display-name>
 
-
-    <!-- 컨텍스트  초기화 파라미터 설정-->
+    <!-- 컨텍스트 초기화 파라미터 설정 -->
     <context-param>
         <param-name>aaa</param-name>
-        <param-value>aaa</param-value>
+        <param-value>okok</param-value>
     </context-param>
 
-    <context-param>
-        <param-name>bbb</param-name>
-        <param-value></param-value>
-    </context-param>    
-    <!--  Listener class에 대한 정보 설정 -->
+    <!-- 리스너 클래스에 대한 정보 설정 -->
     <listener>
         <listener-class>bitcamp.java110.ex07.Listener01</listener-class>
     </listener>
-    
-    <!--
+
+    <!--  
     <request-character-encoding>UTF-8</request-character-encoding>
     -->
     
-    <!-- 서블릿 클래스에 대한 정보 설정  -->
+    <!-- 서블릿 클래스에 대한 정보 설정 -->
     <servlet>
       <servlet-name>Servlet03</servlet-name>
       <servlet-class>bitcamp.java110.ex06.Servlet03</servlet-class>
     </servlet>
-
     <servlet>
       <servlet-name>Servlet04</servlet-name>
       <servlet-class>bitcamp.java110.ex06.Servlet04</servlet-class>
@@ -54,44 +49,49 @@
       </init-param>
       <load-on-startup>1</load-on-startup>
     </servlet>
-
     <servlet>
       <servlet-name>Servlet05</servlet-name>
       <servlet-class>bitcamp.java110.ex06.Servlet05</servlet-class>
-      <!--  서블릿 초기화 파라미터 설정 -->
+      <!-- 서블릿 초기화 파라미터 설정 -->
       <init-param>
         <param-name>aaa</param-name>
         <param-value>hello</param-value>
       </init-param>
     </servlet>
     
-        
+    <!-- 서블릿 클래스에 대해 요청 URL을 설정 -->
     <servlet-mapping>
         <servlet-name>Servlet03</servlet-name>
         <url-pattern>/ex06/servlet03</url-pattern>
     </servlet-mapping>
-
-
     <servlet-mapping>
         <servlet-name>Servlet04</servlet-name>
         <url-pattern>/ex06/servlet04</url-pattern>
     </servlet-mapping>
-    
-
     <servlet-mapping>
         <servlet-name>Servlet05</servlet-name>
         <url-pattern>/ex06/servlet05</url-pattern>
     </servlet-mapping>
     
-        
-    <!-- 클라이언트가 요청한 URL에 대해 정적 파일을 찾을 때 우선 순위  -->
+    <!-- 클라이언트가 요청한 URL에 대해 기본 파일을 찾을 때 우선 순위 -->
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
-    <!-- 세션에 타임아웃 설정 ( 단위: 분)  -->
+    <!-- 세션의 타임아웃 설정(단위: 분) -->
     <session-config>
         <session-timeout>10</session-timeout>
     </session-config>
+
+
 </web-app>
+
+
+
+
+
+
+
+
+
